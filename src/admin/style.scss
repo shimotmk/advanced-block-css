@@ -1,0 +1,47 @@
+.settings {
+
+	&_page {
+
+		&_advanced {
+
+			&-block-css-admin {
+
+				#wpcontent {
+					padding-left: 0;
+				}
+
+				.abc-admin-section {
+					background: #fff;
+					padding: 24px;
+					margin-bottom: 24px;
+					box-shadow: rgba(17, 17, 26, 0.1) 0 0 16px;
+				}
+
+				#advanced-block-css-admin ul,
+				#advanced-block-css-admin ul li {
+					list-style-type: disc;
+				}
+
+				#advanced-block-css-admin ul {
+					padding-left: 20px;
+				}
+
+				#advanced-block-css-admin {
+
+					.components-search-control {
+
+						&__input {
+							height: 36px;
+							margin-left: 0;
+						}
+					}
+				}
+
+				.abc-admin-radio {
+					margin-bottom: 16px;
+				}
+			}
+		}
+	}
+}
+

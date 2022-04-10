@@ -1,0 +1,29 @@
+{
+	"name": "advanced-block-css",
+	"version": "0.1.0",
+	"author": "Tomoki Shimomura",
+	"license": "GPL-2.0-or-later",
+	"scripts": {
+		"build": "wp-scripts build --webpack-copy-php",
+		"format": "wp-scripts format src/",
+		"lint:css": "wp-scripts lint-style '**/*.scss'",
+		"lint:js": "wp-scripts lint-js src/ --fix",
+		"lint:php": "composer format && composer phpcs",
+		"start": "npx wp-env start && open http://localhost:1251 && wp-scripts start",
+		"watch": "wp-scripts start --webpack-copy-php",
+		"plugin-zip": "wp-scripts plugin-zip",
+		"packages-update": "wp-scripts packages-update",
+		"phpunit": "composer install && npx wp-env run phpunit \"phpunit -c /var/www/html/wp-content/plugins/advanced-block-css/phpunit.xml.dist --verbose\"",
+		"prepare": "husky install"
+	},
+	"devDependencies": {
+		"@wordpress/icons": "^8.0.1",
+		"@wordpress/scripts": "^22.2.1",
+		"classnames": "^2.3.1",
+		"lodash": "^4.17.21",
+		"monaco-editor": "^0.33.0",
+		"node-fetch": "^3.2.3",
+		"husky": "^7.0.4"
+	},
+	"dependencies": {}
+}
