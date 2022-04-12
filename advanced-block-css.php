@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Advanced Block CSS for Gutenberg Blocks
- * Plugin URI:
+ * Plugin URI:        https://github.com/shimotmk/advanced-block-css
  * Description:       Advanced Block CSS for Gutenberg Blocks.
  * Requires at least: 5.9
  * Requires PHP:      7.4
