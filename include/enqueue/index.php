@@ -38,6 +38,7 @@ add_filter(
 				abc_register_style( $css );
 				return $block_content;
 			} else {
+				// ブロック直前にインラインで読み込む
 				return '<style>' . $css . '</style>' . $block_content;
 			}
 		}
@@ -48,8 +49,9 @@ add_filter(
 );
 
 /**
- * Cssをminifyする
+ * Minify Css
  *
+ * https://shimotsuki.wwwxyz.jp/20200930-650
  * @param string $css css.
  */
 function abc_minify_css( $css ) {
@@ -69,24 +71,23 @@ function abc_minify_css( $css ) {
 	return wp_strip_all_tags( $css );
 }
 
-$list = '';
+$advanced_block_css_list = '';
 /**
  * Bundle Css
  *
  * @param string $css css.
  */
 function abc_register_style( $css ) {
-	global $list;
-	$list .= $css;
+	global $advanced_block_css_list;
+	$advanced_block_css_list .= $css;
 }
 
 add_action(
 	'wp_enqueue_scripts',
 	function() {
-		global $list;
-		// $list = 'colo:red;';
+		global $advanced_block_css_list;
 		wp_register_style( 'acs-style', false );
 		wp_enqueue_style( 'acs-style' );
-		wp_add_inline_style( 'acs-style', abc_minify_css( $list ) );
+		wp_add_inline_style( 'acs-style', abc_minify_css( $advanced_block_css_list ) );
 	}
 );
