@@ -29,8 +29,8 @@ add_action(
 add_filter(
 	'render_block',
 	function ( $block_content, $block ) {
-		if ( isset( $block['attrs']['acsStyles'] ) && '' !== $block['attrs']['acsStyles'] ) {
-			$css        = $block['attrs']['acsStyles'];
+		if ( isset( $block['attrs']['advancedBlockCss'] ) && '' !== $block['attrs']['advancedBlockCss'] ) {
+			$css        = $block['attrs']['advancedBlockCss'];
 			$abc_option = get_option( 'advanced_block_css_options' );
 			// headで読み込む場合.
 			if ( 'head' === $abc_option['enqueue'] ) {

@@ -27,7 +27,7 @@ import './style.scss';
 const abcRegisterBlockTypeFuc = ( settings ) => {
 	if ( hasBlockSupport( settings, 'customClassName', true ) ) {
 		settings.attributes = assign( settings.attributes, {
-			acsStyles: {
+			advancedBlockCss: {
 				type: 'string',
 			},
 		} );
@@ -46,7 +46,7 @@ addFilter(
 const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
 		const { name, attributes, setAttributes, isSelected } = props;
-		const { acsStyles } = attributes;
+		const { advancedBlockCss } = attributes;
 		const hasCustomClassName = hasBlockSupport(
 			name,
 			'customClassName',
@@ -54,7 +54,7 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 		);
 
 		const onChange = ( value ) => {
-			setAttributes( { acsStyles: value } );
+			setAttributes( { advancedBlockCss: value } );
 		};
 		if ( hasCustomClassName && isSelected ) {
 			return (
@@ -63,11 +63,11 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 					<InspectorControls>
 						<PanelBody
 							title={ __( 'ABC', 'advanced-block-css' ) }
-							initialOpen={ acsStyles ? true : false }
+							initialOpen={ advancedBlockCss ? true : false }
 						>
 							<PlainText
 								className="acs-plane-text"
-								value={ acsStyles }
+								value={ advancedBlockCss }
 								onChange={ onChange }
 							/>
 						</PanelBody>
@@ -89,8 +89,8 @@ addFilter(
  */
 const abcBlockListBlockFun = createHigherOrderComponent( ( BlockListBlock ) => {
 	return ( props ) => {
-		const acsStyle = props.attributes.acsStyles
-			? props.attributes.acsStyles
+		const acsStyle = props.attributes.advancedBlockCss
+			? props.attributes.advancedBlockCss
 			: '';
 		return (
 			<>
