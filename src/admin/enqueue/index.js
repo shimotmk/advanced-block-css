@@ -71,7 +71,7 @@ export default function EnqueueSection() {
 					},
 					{
 						label: __(
-							'Just before the block',
+							'Load inline just before block',
 							'advanced-block-css'
 						),
 						value: 'just-before-block',
