@@ -13,6 +13,12 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Frequently Asked Questions ==
 
+== Resources ==
+
+= monaco-editor/react =
+License: MIT License
+Source: https://github.com/suren-atoyan/monaco-react/
+
 == Changelog ==
 
 = 0.1.0 =
