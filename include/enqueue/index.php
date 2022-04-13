@@ -8,7 +8,6 @@
 add_action(
 	'enqueue_block_editor_assets',
 	function () {
-		wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
 
 		$asset_file = include ADVANCED_BLOCK_CSS_DIR_PATH . 'build/advanced-block-css/index.asset.php';
 		wp_enqueue_script(
@@ -38,7 +37,7 @@ add_filter(
 				abc_register_style( $css );
 				return $block_content;
 			} else {
-				// ブロック直前にインラインで読み込む
+				// ブロック直前にインラインで読み込む.
 				return '<style>' . $css . '</style>' . $block_content;
 			}
 		}
@@ -51,7 +50,8 @@ add_filter(
 /**
  * Minify Css
  *
- * https://shimotsuki.wwwxyz.jp/20200930-650
+ * @see https://shimotsuki.wwwxyz.jp/20200930-650
+ *
  * @param string $css css.
  */
 function abc_minify_css( $css ) {
@@ -86,8 +86,8 @@ add_action(
 	'wp_enqueue_scripts',
 	function() {
 		global $advanced_block_css_list;
-		wp_register_style( 'acs-style', false );
-		wp_enqueue_style( 'acs-style' );
-		wp_add_inline_style( 'acs-style', abc_minify_css( $advanced_block_css_list ) );
+		wp_register_style( 'advanced-block-css-style', false );
+		wp_enqueue_style( 'advanced-block-css-style' );
+		wp_add_inline_style( 'advanced-block-css-style', abc_minify_css( $advanced_block_css_list ) );
 	}
 );
