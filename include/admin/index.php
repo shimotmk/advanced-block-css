@@ -46,6 +46,13 @@ add_action(
 				'type'    => 'string',
 				'default' => 'head',
 			),
+			'editor'  => array(
+				'type'    => 'string',
+				'default' => 'CodeMirror',
+			),
+			// 'activationBlock' => array(
+			// 'type'    => 'array'
+			// ),
 		);
 
 		foreach ( $default_option_settings as $key => $value ) {
@@ -70,6 +77,23 @@ add_action(
 		);
 	}
 );
+
+/**
+ * Get all Block.
+ */
+function abc_get_all_block() {
+	$block_list     = WP_Block_Type_Registry::get_instance()->get_all_registered();
+	$abc_block_list = array();
+	foreach ( $block_list as $key => $block ) {
+		$block_info             = array(
+			'name'     => $block->name,
+			'title'    => $block->title,
+			'category' => $block->category,
+		);
+		$abc_block_list[ $key ] = $block_info;
+	}
+	return $abc_block_list;
+}
 
 /**
  * Enqueue admin assets for this example.
@@ -102,6 +126,8 @@ add_action(
 		wp_enqueue_script( 'abc-admin-script' );
 		$abc_option = get_option( 'advanced_block_css_options' );
 		wp_localize_script( 'abc-admin-script', 'advancedBlockCssOptions', $abc_option );
+		$abc_block_list = abc_get_all_block();
+		wp_localize_script( 'abc-admin-script', 'abcBlocksList', $abc_block_list );
 
 		// Load css.
 		wp_register_style(
@@ -113,3 +139,4 @@ add_action(
 		wp_enqueue_style( 'abc-admin-css' );
 	}
 );
+
