@@ -25,5 +25,10 @@
 		"node-fetch": "^3.2.3",
 		"husky": "^7.0.4"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"@codemirror/lang-css": "^0.19.3",
+		"@codemirror/view": "^0.19.48",
+		"@monaco-editor/react": "^4.4.2",
+		"@uiw/react-codemirror": "^4.6.0"
+	}
 }
