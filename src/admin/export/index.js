@@ -95,7 +95,7 @@ function PagesList( { hasResolved, pages } ) {
 									</td>
 								);
 							} )() }
-							{/*{page.content.rendered} */ }
+							{ /*{page.content.rendered} */ }
 						</tr>
 					) ) }
 				</tbody>
