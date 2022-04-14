@@ -18,6 +18,9 @@ add_action(
 			true
 		);
 
+		$abc_option = get_option( 'advanced_block_css_options' );
+		wp_localize_script( 'advanced-block-css-script', 'advancedBlockCssOptions', $abc_option );
+
 		wp_enqueue_style(
 			'advanced-block-css-style',
 			ADVANCED_BLOCK_CSS_DIR_URL . 'build/advanced-block-css/style-index.css'
@@ -32,7 +35,7 @@ add_filter(
 			$css        = $block['attrs']['advancedBlockCss'];
 			$abc_option = get_option( 'advanced_block_css_options' );
 			// headで読み込む場合.
-			if ( 'head' === $abc_option['enqueue'] ) {
+			if ( ! empty( $abc_option['enqueue'] ) && 'head' === $abc_option['enqueue'] ) {
 				// 使用しているcssを登録する.
 				abc_register_style( $css );
 				return $block_content;
