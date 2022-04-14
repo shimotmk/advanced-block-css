@@ -12,11 +12,16 @@ import { hasBlockSupport } from '@wordpress/blocks';
  * External dependencies
  */
 import { assign } from 'lodash';
+import CodeMirror from '@uiw/react-codemirror';
+import MonacoEditor from '@monaco-editor/react';
+import { css } from '@codemirror/lang-css';
+import { EditorView } from '@codemirror/view';
 
 /**
  * Internal dependencies
  */
 // import AbcEdit from './edit.js';
+/*globals advancedBlockCssOptions */
 import './style.scss';
 
 /**
@@ -52,6 +57,7 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 			'customClassName',
 			true
 		);
+		const editorOption = advancedBlockCssOptions.editor;
 
 		const onChange = ( value ) => {
 			setAttributes( { advancedBlockCss: value } );
@@ -65,11 +71,35 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 							title={ __( 'ABC', 'advanced-block-css' ) }
 							initialOpen={ advancedBlockCss ? true : false }
 						>
-							<PlainText
-								className="acs-plane-text"
-								value={ advancedBlockCss }
-								onChange={ onChange }
-							/>
+							{ editorOption === 'CodeMirror' && (
+								<CodeMirror
+									className="abc-editor"
+									height="200px"
+									extensions={ [
+										css(),
+										EditorView.lineWrapping,
+									] }
+									value={ advancedBlockCss }
+									onChange={ onChange }
+								/>
+							) }
+							{ editorOption === 'MonacoEditor' && (
+								<MonacoEditor
+									className="abc-editor"
+									height="200px"
+									defaultLanguage="css"
+									options={ { wordWrap: true } }
+									value={ advancedBlockCss }
+									onChange={ onChange }
+								/>
+							) }
+							{ editorOption === 'PlainText' && (
+								<PlainText
+									className="abc-plane-text"
+									value={ advancedBlockCss }
+									onChange={ onChange }
+								/>
+							) }
 						</PanelBody>
 					</InspectorControls>
 				</>

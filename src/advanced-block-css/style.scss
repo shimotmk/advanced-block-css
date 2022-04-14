@@ -1,7 +1,12 @@
 .edit-post-layout {
+
+	.abc-editor {
+		border: 1px solid rgb(221, 221, 221);
+	}
+
 	// text
-	.acs-plane-text {
+	.abc-plane-text {
 		padding: 12px;
-		border: 1px solid #1e1e1e;
+		border: 1px solid rgb(221, 221, 221);
 	}
 }
