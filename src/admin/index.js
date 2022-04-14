@@ -7,7 +7,9 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import EditorSection from './editor';
 import EnqueueSection from './enqueue';
+import ActivationSection from './activation';
 import ExportSection from './export';
 import './style.scss';
 // https://developer.wordpress.org/block-editor/how-to-guides/data-basics/3-building-an-edit-form/
@@ -27,7 +29,13 @@ function AbcAdmin() {
 			</div>
 			<div className="privacy-settings-body">
 				<section className="abc-admin-section">
+					<EditorSection />
+				</section>
+				<section className="abc-admin-section">
 					<EnqueueSection />
+				</section>
+				<section className="abc-admin-section">
+					<ActivationSection />
 				</section>
 				<section className="abc-admin-section">
 					<ExportSection />
