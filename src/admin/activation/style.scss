@@ -1,0 +1,23 @@
+.abc-admin-activation-block {
+	display: flex;
+	flex-wrap: wrap;
+	max-height: 500px;
+	overflow-y: scroll;
+	border: 1px solid #ddd;
+	padding: 8px;
+
+	.abc-admin-activation-block-category {
+		margin-bottom: 4px;
+	}
+
+	.abc-admin-activation-block-list {
+		width: calc(100% / 3);
+		padding: 8px 0;
+		border-bottom: 1px solid rgb(17 17 26 / 10%);
+
+		@media ( max-width: 576px ) {
+			width: calc(100% / 2);
+		}
+
+	}
+}
