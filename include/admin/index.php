@@ -5,19 +5,6 @@
  * @package advanced-block-css
  */
 
-add_filter(
-	'plugin_action_links',
-	function ( $links, $file ) {
-		if ( plugin_basename( ADVANCED_BLOCK_CSS_DIR_PATH . '/advanced-block-css.php' ) === $file ) {
-			$settings_link = '<a href="' . esc_url( admin_url( '/options-general.php?page=advanced-block-css-admin' ) ) . '">' . __( 'Setting', 'advanced-block-css' ) . '</a>';
-			array_unshift( $links, $settings_link );
-		}
-		return $links;
-	},
-	10,
-	2
-);
-
 add_action(
 	'admin_menu',
 	function () {
@@ -26,12 +13,17 @@ add_action(
 			'Advanced Block CSS Setting',
 			'administrator',
 			'advanced-block-css-admin',
-			function () {
-				echo '<div id="advanced-block-css-admin"></div>';
-			}
+			'advanced_block_css_settings_page'
 		);
 	}
 );
+
+/**
+ * オプションページのコンテンツ
+ */
+function advanced_block_css_settings_page() {
+	echo '<div id="advanced-block-css-admin"></div>';
+}
 
 /**
  * 設定項目の登録.
