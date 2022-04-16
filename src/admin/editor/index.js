@@ -2,10 +2,9 @@
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
-import { useState } from '@wordpress/element';
-import { RadioControl, Button, Spinner } from '@wordpress/components';
+import { useContext } from '@wordpress/element';
+import { RadioControl } from '@wordpress/components';
 import { PlainText } from '@wordpress/block-editor';
-import api from '@wordpress/api';
 
 /**
  * External dependencies
@@ -18,44 +17,16 @@ import { EditorView } from '@codemirror/view';
 /**
  * Internal dependencies
  */
-/*globals advancedBlockCssOptions */
 import './style.scss';
+import { AdminContext } from '../index';
 
 export default function EditorSection() {
-	const [ abcOption, setAbcOption ] = useState( {
-		editor: advancedBlockCssOptions.editor,
-	} );
+	const { abcOption, setAbcOption } = useContext( AdminContext );
+
+	// console.log( abcOption );
 
 	const updateOptionValue = ( newValue ) => {
 		setAbcOption( newValue );
-	};
-
-	const [ isLoading, setIsLoading ] = useState( false );
-	const [ isSaveSuccess, setIsSaveSuccess ] = useState( '' );
-
-	// オプション値を保存
-	const onClickUpdate = () => {
-		setIsLoading( true );
-		api.loadPromise.then( () => {
-			const model = new api.models.Settings( {
-				advanced_block_css_options: abcOption,
-			} );
-			const save = model.save();
-
-			save.success( () => {
-				setTimeout( () => {
-					setIsLoading( false );
-					setIsSaveSuccess( true );
-				}, 600 );
-			} );
-
-			save.error( () => {
-				setTimeout( () => {
-					setIsLoading( false );
-					setIsSaveSuccess( false );
-				}, 600 );
-			} );
-		} );
 	};
 
 	const abcEditorPreviewValue = `html {
@@ -134,12 +105,6 @@ body {
 					) }
 				</div>
 			</div>
-			<Button isPrimary onClick={ onClickUpdate } isBusy={ isLoading }>
-				{ __( 'Save setting', 'advanced-block-css' ) }
-			</Button>
-			{ isLoading && <Spinner /> }
-			{ isSaveSuccess === false &&
-				__( 'Failed to save.', 'advanced-block-css' ) }
 		</>
 	);
 }
