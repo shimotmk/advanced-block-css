@@ -71,35 +71,37 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 							title={ __( 'ABC', 'advanced-block-css' ) }
 							initialOpen={ advancedBlockCss ? true : false }
 						>
-							{ editorOption === 'CodeMirror' && (
-								<CodeMirror
-									className="abc-editor"
-									height="200px"
-									extensions={ [
-										css(),
-										EditorView.lineWrapping,
-									] }
-									value={ advancedBlockCss }
-									onChange={ onChange }
-								/>
-							) }
-							{ editorOption === 'MonacoEditor' && (
-								<MonacoEditor
-									className="abc-editor"
-									height="200px"
-									defaultLanguage="css"
-									options={ { wordWrap: true } }
-									value={ advancedBlockCss }
-									onChange={ onChange }
-								/>
-							) }
-							{ editorOption === 'PlainText' && (
-								<PlainText
-									className="abc-plane-text"
-									value={ advancedBlockCss }
-									onChange={ onChange }
-								/>
-							) }
+							<div>
+								{ editorOption === 'CodeMirror' && (
+									<CodeMirror
+										className="abc-editor"
+										height="200px"
+										extensions={ [
+											css(),
+											EditorView.lineWrapping,
+										] }
+										value={ advancedBlockCss }
+										onChange={ onChange }
+									/>
+								) }
+								{ editorOption === 'MonacoEditor' && (
+									<MonacoEditor
+										className="abc-editor"
+										height="200px"
+										defaultLanguage="css"
+										options={ { wordWrap: true } }
+										value={ advancedBlockCss }
+										onChange={ onChange }
+									/>
+								) }
+								{ editorOption === 'PlainText' && (
+									<PlainText
+										className="abc-editor abc-plane-text"
+										value={ advancedBlockCss }
+										onChange={ onChange }
+									/>
+								) }
+							</div>
 						</PanelBody>
 					</InspectorControls>
 				</>
