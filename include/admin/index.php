@@ -179,11 +179,11 @@ function abc_get_default_option() {
 	}
 
 	$default_option_settings = array(
-		'enqueue' => array(
+		'enqueue'         => array(
 			'type'    => 'string',
-			'default' => 'head',
+			'default' => 'just-before-block',
 		),
-		'editor'  => array(
+		'editor'          => array(
 			'type'    => 'string',
 			'default' => 'CodeMirror',
 		),

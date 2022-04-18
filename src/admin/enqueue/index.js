@@ -32,15 +32,15 @@ export default function EnqueueSection() {
 				selected={ abcOption.enqueue }
 				options={ [
 					{
-						label: __( 'Head (Default)', 'advanced-block-css' ),
-						value: 'head',
-					},
-					{
 						label: __(
 							'Load inline just before block',
 							'advanced-block-css'
 						),
 						value: 'just-before-block',
+					},
+					{
+						label: __( 'Head', 'advanced-block-css' ),
+						value: 'head',
 					},
 				] }
 				onChange={ ( newValue ) => {

@@ -33,9 +33,9 @@ add_filter(
 	function ( $block_content, $block ) {
 		if ( isset( $block['attrs']['advancedBlockCss'] ) && '' !== $block['attrs']['advancedBlockCss'] ) {
 			$css        = $block['attrs']['advancedBlockCss'];
-			$abc_option = get_option( 'advanced_block_css_options' );
-			// headで読み込む場合.
-			if ( ! empty( $abc_option['enqueue'] ) && 'head' === $abc_option['enqueue'] ) {
+			$abc_option = abc_get_option();
+			// just-before-blockで読み込む場合.
+			if ( empty( $abc_option['enqueue'] ) || 'just-before-block' === $abc_option['enqueue'] ) {
 				// 使用しているcssを登録する.
 				abc_register_style( $css );
 				return $block_content;
