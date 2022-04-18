@@ -49,7 +49,7 @@ export default function UpdateButton() {
 
 	return (
 		<>
-			<Button isPrimary onClick={ onClickUpdate } isBusy={ isLoading }>
+			<Button className="update-button" isPrimary onClick={ onClickUpdate } isBusy={ isLoading }>
 				{ __( 'Save setting', 'advanced-block-css' ) }
 			</Button>
 			{ isLoading && <Spinner /> }

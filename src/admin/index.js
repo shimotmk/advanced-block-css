@@ -25,16 +25,6 @@ function AbcAdmin() {
 
 	return (
 		<>
-			<div className="privacy-settings-header">
-				<div className="privacy-settings-title-section">
-					<h1>
-						{ __(
-							'Advanced Block CSS Settings',
-							'advanced-block-css'
-						) }
-					</h1>
-				</div>
-			</div>
 			{ /* AdminContext.Providerで各コンポーネントにvalueを渡す */ }
 			<AdminContext.Provider
 				value={ {
@@ -45,10 +35,18 @@ function AbcAdmin() {
 					abcBlocksList,
 				} }
 			>
-				<div className="privacy-settings-body">
-					<section className="abc-admin-section">
+				<div className="privacy-settings-header">
+					<div className="privacy-settings-title-section">
+						<h1>
+							{ __(
+								'Advanced Block CSS Settings',
+								'advanced-block-css'
+							) }
+						</h1>
 						<UpdateButton />
-					</section>
+					</div>
+				</div>
+				<div className="privacy-settings-body">
 					<section className="abc-admin-section">
 						<EditorSection />
 					</section>

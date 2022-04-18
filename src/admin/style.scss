@@ -10,6 +10,23 @@
 					padding-left: 0;
 				}
 
+				.privacy-settings-title-section {
+					max-width: 800px;
+					margin: 0 auto;
+					position: relative;
+					align-items: center;
+
+					h1 {
+						margin: 0.8rem 1rem;
+						padding: 9px 0;
+					}
+
+					.update-button {
+						position: absolute;
+						right: 0;
+					}
+				}
+
 				.abc-admin-section {
 					background: #fff;
 					padding: 24px;
