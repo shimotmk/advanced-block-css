@@ -13,17 +13,24 @@
 				.privacy-settings-title-section {
 					max-width: 800px;
 					margin: 0 auto;
-					position: relative;
 					align-items: center;
+					justify-content: space-between;
 
 					h1 {
 						margin: 0.8rem 1rem;
 						padding: 9px 0;
+						text-align: left;
 					}
 
-					.update-button {
-						position: absolute;
-						right: 0;
+					@media only screen and (max-width: 1004px) {
+						margin: 0 22px;
+					}
+
+					.update-button-area {
+
+						p {
+							margin: 0;
+						}
 					}
 				}
 
