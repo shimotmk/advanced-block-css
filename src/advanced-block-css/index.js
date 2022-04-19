@@ -20,7 +20,6 @@ import { EditorView } from '@codemirror/view';
 /**
  * Internal dependencies
  */
-// import AbcEdit from './edit.js';
 /*globals advancedBlockCssOptions */
 import './style.scss';
 
@@ -89,7 +88,7 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 										className="abc-editor"
 										height="200px"
 										defaultLanguage="css"
-										options={ { wordWrap: true } }
+										options={ { wordWrap: true, quickSuggestions: false } }
 										value={ advancedBlockCss }
 										onChange={ onChange }
 									/>
