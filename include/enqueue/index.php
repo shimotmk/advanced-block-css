@@ -28,28 +28,6 @@ add_action(
 	}
 );
 
-add_filter(
-	'render_block',
-	function ( $block_content, $block ) {
-		if ( isset( $block['attrs']['advancedBlockCss'] ) && '' !== $block['attrs']['advancedBlockCss'] ) {
-			$css        = $block['attrs']['advancedBlockCss'];
-			$abc_option = abc_get_option();
-			// just-before-blockで読み込む場合.
-			if ( empty( $abc_option['enqueue'] ) || 'just-before-block' === $abc_option['enqueue'] ) {
-				// ブロック直前にインラインで読み込む.
-				return '<style>' . $css . '</style>' . $block_content;
-			} else {
-				// 使用しているcssを登録する.
-				abc_register_style( $css );
-				return $block_content;
-			}
-		}
-		return $block_content;
-	},
-	10,
-	2
-);
-
 /**
  * Minify Css
  *
@@ -75,22 +53,36 @@ function abc_minify_css( $css ) {
 }
 
 $advanced_block_css_list = '';
-/**
- * Bundle Css
- *
- * @param string $css css.
- */
-function abc_register_style( $css ) {
-	global $advanced_block_css_list;
-	$advanced_block_css_list .= $css;
-}
-
 add_action(
 	'wp_enqueue_scripts',
 	function() {
-		global $advanced_block_css_list;
-		wp_register_style( 'advanced-block-css-style', false );
-		wp_enqueue_style( 'advanced-block-css-style' );
-		wp_add_inline_style( 'advanced-block-css-style', abc_minify_css( $advanced_block_css_list ) );
+		add_filter(
+			'render_block',
+			function ( $block_content, $block ) {
+				if ( isset( $block['attrs']['advancedBlockCss'] ) && '' !== $block['attrs']['advancedBlockCss'] ) {
+					$css        = $block['attrs']['advancedBlockCss'];
+					$abc_option = abc_get_option();
+					// インラインで出力するときのcss.
+					global $advanced_block_css_list;
+
+					// just-before-blockで読み込む場合.
+					if ( empty( $abc_option['enqueue'] ) || 'just-before-block' === $abc_option['enqueue'] ) {
+						// ブロック直前にインラインで読み込む.
+						return '<style>' . $css . '</style>' . $block_content;
+					} else {
+						// headにインラインで出力するとき
+						// 使用しているcssをまとめる.
+						$advanced_block_css_list .= $css;
+						wp_register_style( 'advanced-block-css-style', false );
+						wp_enqueue_style( 'advanced-block-css-style' );
+						wp_add_inline_style( 'advanced-block-css-style', abc_minify_css( $advanced_block_css_list ) );
+						return $block_content;
+					}
+				}
+				return $block_content;
+			},
+			10,
+			2
+		);
 	}
 );
