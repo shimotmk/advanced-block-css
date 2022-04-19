@@ -14,7 +14,6 @@ import EnqueueSection from './enqueue';
 import ExportSection from './export';
 import './style.scss';
 /*globals advancedBlockCssOptions */
-/*globals abcBlocksList */
 
 export const AdminContext = createContext();
 
@@ -22,6 +21,7 @@ function AbcAdmin() {
 	// 初期値を設定する
 	const [ isLoading, setIsLoading ] = useState( false );
 	const [ abcOption, setAbcOption ] = useState( advancedBlockCssOptions );
+	// console.log( abcOption );
 
 	return (
 		<>
@@ -32,7 +32,6 @@ function AbcAdmin() {
 					setIsLoading,
 					abcOption,
 					setAbcOption,
-					abcBlocksList,
 				} }
 			>
 				<div className="privacy-settings-header">
