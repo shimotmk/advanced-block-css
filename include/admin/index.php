@@ -13,17 +13,12 @@ add_action(
 			'Advanced Block CSS Setting',
 			'administrator',
 			'advanced-block-css-admin',
-			'advanced_block_css_settings_page'
+			function () {
+				echo'<div id="advanced-block-css-admin"></div>';
+			}
 		);
 	}
 );
-
-/**
- * オプションページのコンテンツ
- */
-function advanced_block_css_settings_page() {
-	echo '<div id="advanced-block-css-admin"></div>';
-}
 
 /**
  * 設定項目の登録.
