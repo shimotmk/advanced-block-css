@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState, useContext, createContext } from '@wordpress/element';
-import { Button, Spinner } from '@wordpress/components';
+import { Button, KeyboardShortcuts } from '@wordpress/components';
 import api from '@wordpress/api';
 
 /**
@@ -20,7 +20,8 @@ export default function UpdateButton() {
 	// console.log( abcOption );
 
 	// オプション値を保存
-	const onClickUpdate = () => {
+	const onClickUpdate = ( event ) => {
+		event.preventDefault();
 		setIsLoading( true );
 		api.loadPromise.then( (/*response*/) => {
 			// console.log( response );
@@ -49,17 +50,25 @@ export default function UpdateButton() {
 
 	return (
 		<>
-			<Button
-				className="update-button"
-				isPrimary
-				onClick={ onClickUpdate }
-				isBusy={ isLoading }
-			>
-				{ __( 'Save setting', 'advanced-block-css' ) }
-			</Button>
-			{ isLoading && <Spinner /> }
-			{ isSaveSuccess === false &&
-				__( 'Failed to save.', 'advanced-block-css' ) }
+			<div className="update-button-area">
+				<KeyboardShortcuts
+					bindGlobal
+					shortcuts={ {
+						'mod+s': onClickUpdate,
+					} }
+				/>
+				<Button
+					className="update-button"
+					isPrimary
+					onClick={ onClickUpdate }
+					isBusy={ isLoading }
+				>
+					{ __( 'Save setting', 'advanced-block-css' ) }
+				</Button>
+				{ isSaveSuccess === false && (
+					<p>{ __( 'Failed to save.', 'advanced-block-css' ) }</p>
+				) }
+			</div>
 		</>
 	);
 }
