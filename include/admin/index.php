@@ -55,8 +55,7 @@ add_action(
 				'default'      => $default_editor_settings,
 			)
 		);
-	},
-	100 // block_listの取得のために遅らせる.
+	}
 );
 
 /**
