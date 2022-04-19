@@ -36,12 +36,12 @@ add_filter(
 			$abc_option = abc_get_option();
 			// just-before-blockで読み込む場合.
 			if ( empty( $abc_option['enqueue'] ) || 'just-before-block' === $abc_option['enqueue'] ) {
+				// ブロック直前にインラインで読み込む.
+				return '<style>' . $css . '</style>' . $block_content;
+			} else {
 				// 使用しているcssを登録する.
 				abc_register_style( $css );
 				return $block_content;
-			} else {
-				// ブロック直前にインラインで読み込む.
-				return '<style>' . $css . '</style>' . $block_content;
 			}
 		}
 		return $block_content;
