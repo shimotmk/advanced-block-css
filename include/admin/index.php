@@ -87,6 +87,7 @@ add_action(
 			true
 		);
 		wp_enqueue_script( 'abc-admin-script' );
+		wp_set_script_translations( 'abc-admin-script', 'advanced-block-css' );
 		$abc_option = abc_get_option();
 		wp_localize_script( 'abc-admin-script', 'advancedBlockCssOptions', $abc_option );
 
