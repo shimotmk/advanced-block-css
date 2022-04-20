@@ -88,7 +88,10 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 										className="abc-editor"
 										height="200px"
 										defaultLanguage="css"
-										options={ { wordWrap: true, quickSuggestions: false } }
+										options={ {
+											wordWrap: true,
+											quickSuggestions: false,
+										} }
 										value={ advancedBlockCss }
 										onChange={ onChange }
 									/>

@@ -93,7 +93,10 @@ body {
 							className="abc-editor"
 							height="200px"
 							defaultLanguage="css"
-							options={ { wordWrap: true } }
+							options={ {
+								wordWrap: true,
+								quickSuggestions: false,
+							} }
 							value={ abcEditorPreviewValue }
 						/>
 					) }
