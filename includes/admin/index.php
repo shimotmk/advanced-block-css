@@ -102,13 +102,17 @@ add_action(
  */
 function abc_get_default_option() {
 	$default_option_settings = array(
-		'enqueue' => array(
+		'enqueue'      => array(
 			'type'    => 'string',
 			'default' => 'just-before-block',
 		),
-		'editor'  => array(
+		'editor'       => array(
 			'type'    => 'string',
 			'default' => 'CodeMirror',
+		),
+		'isBlockTheme' => array(
+			'type'    => 'boolean',
+			'default' => wp_is_block_theme(),
 		),
 	);
 	return $default_option_settings;

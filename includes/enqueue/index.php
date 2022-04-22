@@ -86,3 +86,21 @@ add_action(
 		);
 	}
 );
+
+/**
+ * ブロックテーマのときはheadで出力がなぜか出来ないのでブロック直前に出力する
+ */
+add_filter(
+	'render_block',
+	function ( $block_content, $block ) {
+		if ( wp_is_block_theme() ) {
+			if ( isset( $block['attrs']['advancedBlockCss'] ) && '' !== $block['attrs']['advancedBlockCss'] ) {
+				$css = $block['attrs']['advancedBlockCss'];
+				return '<style>' . $css . '</style>' . $block_content;
+			}
+		}
+		return $block_content;
+	},
+	10,
+	2
+);

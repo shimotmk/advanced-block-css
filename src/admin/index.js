@@ -21,7 +21,6 @@ function AbcAdmin() {
 	// 初期値を設定する
 	const [ isLoading, setIsLoading ] = useState( false );
 	const [ abcOption, setAbcOption ] = useState( advancedBlockCssOptions );
-	// console.log( abcOption );
 
 	return (
 		<>
@@ -49,9 +48,12 @@ function AbcAdmin() {
 					<section className="abc-admin-section">
 						<EditorSection />
 					</section>
-					<section className="abc-admin-section">
-						<EnqueueSection />
-					</section>
+					{ /* block themeの場合はブロック直前にインラインで読み込む */ }
+					{ advancedBlockCssOptions.isBlockTheme === '' ? (
+						<section className="abc-admin-section">
+							<EnqueueSection />
+						</section>
+					) : null }
 					{ /* <section className="abc-admin-section">
 						<ActivationSection />
 					</section> */ }
