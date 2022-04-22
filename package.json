@@ -11,6 +11,8 @@
 		"lint:php": "composer format && composer phpcs",
 		"start": "npx wp-env start && open http://localhost:1251 && wp-scripts start",
 		"watch": "wp-scripts start --webpack-copy-php",
+		"test-e2e:playwright": "playwright test --config test/e2e/playwright.config.ts",
+		"test:e2e": "node ./test/e2e/run-tests.js",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"packages-update": "wp-scripts packages-update",
 		"phpunit": "composer install && npx wp-env run phpunit \"phpunit -c /var/www/html/wp-content/plugins/advanced-block-css/phpunit.xml.dist --verbose\"",
@@ -29,6 +31,9 @@
 		"@codemirror/lang-css": "^0.19.3",
 		"@codemirror/view": "^0.19.48",
 		"@monaco-editor/react": "^4.4.2",
-		"@uiw/react-codemirror": "^4.6.0"
+		"@playwright/test": "^1.21.1",
+		"@uiw/react-codemirror": "^4.6.0",
+		"@wordpress/e2e-test-utils": "^7.3.0",
+		"@wordpress/e2e-tests": "^4.1.0"
 	}
 }
