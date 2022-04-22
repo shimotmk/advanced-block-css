@@ -67,7 +67,11 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 					<BlockEdit { ...props } />
 					<InspectorControls>
 						<PanelBody
-							title={ __( 'ABC', 'advanced-block-css' ) }
+							className={ 'abc-editor-panel-body' }
+							title={ __(
+								'Advanced Block CSS',
+								'advanced-block-css'
+							) }
 							initialOpen={ advancedBlockCss ? true : false }
 						>
 							<div>
