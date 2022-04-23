@@ -37,13 +37,14 @@ export default function CSSExport( { page } ) {
 			].map( ( x ) => x.textContent );
 			cssContent = cssContent.join( '' );
 		} else {
-			let string = page.content.raw;
-			string = string.replace( /\?n/g, '' );
+			const string = page.content.raw;
 			const regex = /"advancedBlockCss":"(.+)"/g;
 			let arr = string.match( regex, '' );
 			arr = arr.map( ( item ) =>
 				item.replace( `"advancedBlockCss":"`, '' ).slice( 0, -1 )
 			);
+			// 改行コードを削除
+			arr = arr.map( ( item ) => item.replace( /\\n/g, '' ) );
 			cssContent = arr.join( '' );
 		}
 
