@@ -24,7 +24,7 @@ import { EditorView } from '@codemirror/view';
 import './style.scss';
 
 /**
- * Block.json的なやつ
+ * Block.json
  *
  * @param {string} settings
  */
