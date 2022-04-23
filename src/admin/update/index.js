@@ -17,8 +17,6 @@ export default function UpdateButton() {
 	const { isLoading, abcOption, setIsLoading } = useContext( AdminContext );
 	const [ isSaveSuccess, setIsSaveSuccess ] = useState( '' );
 
-	// console.log( abcOption );
-
 	// オプション値を保存
 	const onClickUpdate = ( event ) => {
 		event.preventDefault();

@@ -15,6 +15,7 @@ import EnqueueSection from './enqueue';
 import ExportSection from './export';
 import './style.scss';
 /*globals advancedBlockCssOptions */
+/*globals ABCSCRIPT */
 
 export const AdminContext = createContext();
 
@@ -22,6 +23,8 @@ function AbcAdmin() {
 	// 初期値を設定する
 	const [ isLoading, setIsLoading ] = useState( false );
 	const [ abcOption, setAbcOption ] = useState( advancedBlockCssOptions );
+
+	// console.log( ABCSCRIPT.isBlockTheme );
 
 	return (
 		<>
@@ -50,12 +53,12 @@ function AbcAdmin() {
 					<section className="abc-admin-section">
 						<EditorSection />
 					</section>
-					{ /* block themeの場合はブロック直前にインラインで読み込む */ }
-					{ advancedBlockCssOptions.isBlockTheme === '' ? (
+					{ /* block themeの場合はブロック直前にインラインで読み込むのでEnqueueSectionは表示しない */ }
+					{ ! ABCSCRIPT.isBlockTheme && (
 						<section className="abc-admin-section">
 							<EnqueueSection />
 						</section>
-					) : null }
+					) }
 					{ /* <section className="abc-admin-section">
 						<ActivationSection />
 					</section> */ }

@@ -86,6 +86,16 @@ add_action(
 		$abc_option = abc_get_option();
 		wp_localize_script( 'abc-admin-script', 'advancedBlockCssOptions', $abc_option );
 
+		wp_add_inline_script(
+			'abc-admin-script',
+			'const ABCSCRIPT = ' . json_encode(
+				array(
+					'isBlockTheme' => wp_is_block_theme(),
+				)
+			),
+			'before'
+		);
+
 		// Load css.
 		wp_register_style(
 			'abc-admin-css',
@@ -102,17 +112,13 @@ add_action(
  */
 function abc_get_default_option() {
 	$default_option_settings = array(
-		'enqueue'      => array(
+		'enqueue' => array(
 			'type'    => 'string',
 			'default' => 'just-before-block',
 		),
-		'editor'       => array(
+		'editor'  => array(
 			'type'    => 'string',
 			'default' => 'CodeMirror',
-		),
-		'isBlockTheme' => array(
-			'type'    => 'boolean',
-			'default' => wp_is_block_theme(),
 		),
 	);
 	return $default_option_settings;

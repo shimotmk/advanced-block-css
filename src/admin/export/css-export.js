@@ -8,7 +8,7 @@ import { download } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-/*globals advancedBlockCssOptions */
+/*globals ABCSCRIPT */
 
 export default function CSSExport( { page } ) {
 	// https://github.com/WordPress/gutenberg/pull/22922#discussion_r439556871
@@ -27,7 +27,7 @@ export default function CSSExport( { page } ) {
 
 		let cssContent;
 		// ブロックテーマのとき
-		if ( advancedBlockCssOptions.isBlockTheme === '' ) {
+		if ( ABCSCRIPT.isBlockTheme ) {
 			const renderedString = page.content.rendered;
 			const tag = 'style';
 			cssContent = [
