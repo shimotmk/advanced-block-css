@@ -22,10 +22,9 @@
 		"@wordpress/icons": "^8.0.1",
 		"@wordpress/scripts": "^22.2.1",
 		"classnames": "^2.3.1",
+		"husky": "^7.0.4",
 		"lodash": "^4.17.21",
-		"monaco-editor": "^0.33.0",
-		"node-fetch": "^3.2.3",
-		"husky": "^7.0.4"
+		"node-fetch": "^3.2.3"
 	},
 	"dependencies": {
 		"@codemirror/lang-css": "^0.19.3",
