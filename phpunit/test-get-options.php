@@ -18,8 +18,8 @@ class GetOptionsTest extends WP_UnitTestCase {
 			array(
 				'option'  => null,
 				'correct' => array(
-					'enqueue'      => 'just-before-block',
-					'editor'       => 'CodeMirror',
+					'enqueue' => 'just-before-block',
+					'editor'  => 'CodeMirror',
 				),
 			),
 			array(
@@ -27,8 +27,8 @@ class GetOptionsTest extends WP_UnitTestCase {
 					'enqueue' => 'just-before-block',
 				),
 				'correct' => array(
-					'enqueue'      => 'just-before-block',
-					'editor'       => 'CodeMirror',
+					'enqueue' => 'just-before-block',
+					'editor'  => 'CodeMirror',
 				),
 			),
 			array(
@@ -36,8 +36,8 @@ class GetOptionsTest extends WP_UnitTestCase {
 					'editor' => 'MonacoEditor',
 				),
 				'correct' => array(
-					'enqueue'      => 'just-before-block',
-					'editor'       => 'MonacoEditor',
+					'enqueue' => 'just-before-block',
+					'editor'  => 'MonacoEditor',
 				),
 			),
 			array(
@@ -46,18 +46,18 @@ class GetOptionsTest extends WP_UnitTestCase {
 					'editor'  => 'MonacoEditor',
 				),
 				'correct' => array(
-					'enqueue'      => 'head',
-					'editor'       => 'MonacoEditor',
+					'enqueue' => 'head',
+					'editor'  => 'MonacoEditor',
 				),
 			),
 			array(
 				'option'  => array(
-					'enqueue'      => 'head',
-					'editor'       => 'MonacoEditor',
+					'enqueue' => 'head',
+					'editor'  => 'MonacoEditor',
 				),
 				'correct' => array(
-					'enqueue'      => 'head',
-					'editor'       => 'MonacoEditor',
+					'enqueue' => 'head',
+					'editor'  => 'MonacoEditor',
 				),
 			),
 		);
