@@ -20,7 +20,6 @@ class GetOptionsTest extends WP_UnitTestCase {
 				'correct' => array(
 					'enqueue'      => 'just-before-block',
 					'editor'       => 'CodeMirror',
-					'isBlockTheme' => false,
 				),
 			),
 			array(
@@ -30,7 +29,6 @@ class GetOptionsTest extends WP_UnitTestCase {
 				'correct' => array(
 					'enqueue'      => 'just-before-block',
 					'editor'       => 'CodeMirror',
-					'isBlockTheme' => false,
 				),
 			),
 			array(
@@ -40,7 +38,6 @@ class GetOptionsTest extends WP_UnitTestCase {
 				'correct' => array(
 					'enqueue'      => 'just-before-block',
 					'editor'       => 'MonacoEditor',
-					'isBlockTheme' => false,
 				),
 			),
 			array(
@@ -51,19 +48,16 @@ class GetOptionsTest extends WP_UnitTestCase {
 				'correct' => array(
 					'enqueue'      => 'head',
 					'editor'       => 'MonacoEditor',
-					'isBlockTheme' => false,
 				),
 			),
 			array(
 				'option'  => array(
 					'enqueue'      => 'head',
 					'editor'       => 'MonacoEditor',
-					'isBlockTheme' => true,
 				),
 				'correct' => array(
 					'enqueue'      => 'head',
 					'editor'       => 'MonacoEditor',
-					'isBlockTheme' => true,
 				),
 			),
 		);
