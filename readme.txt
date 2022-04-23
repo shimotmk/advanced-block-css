@@ -1,4 +1,4 @@
-=== Advanced Block CSS for Gutenberg Blocks ===
+=== Advanced Block CSS ===
 Contributors: shimotomoki
 Donate link: https://www.amazon.jp/hz/wishlist/ls/2N2XNHHUW2GXP?ref_=wl_share
 Tags: gutenberg,css,block,css editor
