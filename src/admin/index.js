@@ -7,6 +7,7 @@ import { __ } from '@wordpress/i18n';
 /**
  * Internal dependencies
  */
+import { ABCIconBold } from '../utils/logo';
 import UpdateButton from './update';
 import EditorSection from './editor';
 import EnqueueSection from './enqueue';
@@ -36,6 +37,7 @@ function AbcAdmin() {
 				<div className="privacy-settings-header">
 					<div className="privacy-settings-title-section">
 						<h1>
+							{ABCIconBold}
 							{ __(
 								'Advanced Block CSS Settings',
 								'advanced-block-css'
