@@ -1,7 +1,6 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
 import { PanelBody } from '@wordpress/components';
 import { InspectorControls, PlainText } from '@wordpress/block-editor';
@@ -22,6 +21,7 @@ import { EditorView } from '@codemirror/view';
  */
 /*globals advancedBlockCssOptions */
 import './style.scss';
+import { ABCIconBold } from '../utils/logo';
 
 /**
  * Block.json
@@ -68,10 +68,8 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 					<InspectorControls>
 						<PanelBody
 							className={ 'abc-editor-panel-body' }
-							title={ __(
-								'Advanced Block CSS',
-								'advanced-block-css'
-							) }
+							title={ `Advanced Block CSS` }
+							icon={ ABCIconBold }
 							initialOpen={ advancedBlockCss ? true : false }
 						>
 							<div>

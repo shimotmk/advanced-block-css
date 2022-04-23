@@ -1,5 +1,16 @@
 .edit-post-layout {
 
+	.abc-editor-panel-body {
+
+		.components-panel {
+
+			&__icon {
+				height: 16px;
+				margin-left: 2px;
+			}
+		}
+	}
+
 	.abc-editor {
 		border: 1px solid rgb(221, 221, 221);
 	}
