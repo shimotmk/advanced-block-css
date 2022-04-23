@@ -37,7 +37,7 @@ function AbcAdmin() {
 				<div className="privacy-settings-header">
 					<div className="privacy-settings-title-section">
 						<h1>
-							{ABCIconBold}
+							{ ABCIconBold }
 							{ __(
 								'Advanced Block CSS Settings',
 								'advanced-block-css'
