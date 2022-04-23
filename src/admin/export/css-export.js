@@ -5,6 +5,11 @@ import { __ } from '@wordpress/i18n';
 import { Button } from '@wordpress/components';
 import { download } from '@wordpress/icons';
 
+/**
+ * Internal dependencies
+ */
+/*globals advancedBlockCssOptions */
+
 export default function CSSExport( { page } ) {
 	// https://github.com/WordPress/gutenberg/pull/22922#discussion_r439556871
 	async function handleExport() {
@@ -20,14 +25,27 @@ export default function CSSExport( { page } ) {
 			document.body.removeChild( anchor );
 		}
 
-		const renderedString = page.content.rendered;
-		const tag = 'style';
-		let cssContent = [
-			...Object.assign( document.createElement( 'template' ), {
-				innerHTML: renderedString,
-			} ).content.querySelectorAll( tag ),
-		].map( ( x ) => x.textContent );
-		cssContent = cssContent.join( '' );
+		let cssContent;
+		// ブロックテーマのとき
+		if ( advancedBlockCssOptions.isBlockTheme === '' ) {
+			const renderedString = page.content.rendered;
+			const tag = 'style';
+			cssContent = [
+				...Object.assign( document.createElement( 'template' ), {
+					innerHTML: renderedString,
+				} ).content.querySelectorAll( tag ),
+			].map( ( x ) => x.textContent );
+			cssContent = cssContent.join( '' );
+		} else {
+			let string = page.content.raw;
+			string = string.replace( /\?n/g, '' );
+			const regex = /"advancedBlockCss":"(.+)"/g;
+			let arr = string.match( regex, '' );
+			arr = arr.map( ( item ) =>
+				item.replace( `"advancedBlockCss":"`, '' ).slice( 0, -1 )
+			);
+			cssContent = arr.join( '' );
+		}
 
 		downloadBlob( cssContent, 'style.css', 'text/css' );
 	}

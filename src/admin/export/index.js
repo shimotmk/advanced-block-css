@@ -12,6 +12,7 @@ import { __ } from '@wordpress/i18n';
  */
 import CSSExport from './css-export';
 // https://developer.wordpress.org/block-editor/how-to-guides/data-basics/3-building-an-edit-form/
+/*globals advancedBlockCssOptions */
 
 export default function ExportSection() {
 	const [ searchTerm, setSearchTerm ] = useState( '' );
@@ -78,9 +79,19 @@ function PagesList( { hasResolved, pages } ) {
 						<tr key={ page.id }>
 							<td>{ page.title.rendered }</td>
 							{ ( () => {
-								const renderContent = page.content.rendered;
-								const regexp = /style/;
-								if ( regexp.test( renderContent ) ) {
+								let content;
+								let regexp;
+								// ブロックテーマの場合
+								if (
+									advancedBlockCssOptions.isBlockTheme === ''
+								) {
+									content = page.content.rendered;
+									regexp = /style/;
+								} else {
+									content = page.content.raw;
+									regexp = /advancedBlockCss/;
+								}
+								if ( regexp.test( content ) ) {
 									return (
 										<td>
 											<CSSExport page={ page } />
@@ -96,7 +107,6 @@ function PagesList( { hasResolved, pages } ) {
 									</td>
 								);
 							} )() }
-							{ /*{page.content.rendered} */ }
 						</tr>
 					) ) }
 				</tbody>
