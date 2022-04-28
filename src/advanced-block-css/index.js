@@ -23,13 +23,28 @@ import { EditorView } from '@codemirror/view';
 import './style.scss';
 import { ABCIconBold } from '../utils/logo';
 
+export const inString = ( str, keyword ) => {
+	return str.indexOf( keyword ) !== -1;
+};
+
+export const isAddBlockCss = ( blockName ) => {
+	// coreブロックの時 true を返す
+	const allowed = [ 'core' ];
+	const returnBool =
+		allowed.find( ( item ) => inString( blockName, item ) ) !== undefined;
+	return returnBool;
+};
+
 /**
  * Block.json
  *
  * @param {string} settings
  */
 const abcRegisterBlockTypeFuc = ( settings ) => {
-	if ( hasBlockSupport( settings, 'customClassName', true ) ) {
+	if (
+		isAddBlockCss( settings.name ) &&
+		hasBlockSupport( settings, 'customClassName', true )
+	) {
 		settings.attributes = assign( settings.attributes, {
 			advancedBlockCss: {
 				type: 'string',
@@ -61,7 +76,7 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 		const onChange = ( value ) => {
 			setAttributes( { advancedBlockCss: value } );
 		};
-		if ( hasCustomClassName && isSelected ) {
+		if ( isAddBlockCss( props.name ) && hasCustomClassName && isSelected ) {
 			return (
 				<>
 					<BlockEdit { ...props } />
