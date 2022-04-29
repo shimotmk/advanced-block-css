@@ -27,11 +27,8 @@
 		"node-fetch": "^3.2.3"
 	},
 	"dependencies": {
-		"@codemirror/lang-css": "^0.19.3",
-		"@codemirror/view": "^0.19.48",
 		"@monaco-editor/react": "^4.4.2",
 		"@playwright/test": "^1.21.1",
-		"@uiw/react-codemirror": "^4.6.0",
 		"@wordpress/e2e-test-utils": "^7.3.0",
 		"@wordpress/e2e-tests": "^4.1.0"
 	}

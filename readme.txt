@@ -21,19 +21,6 @@ Add a simple CSS editor to your Gutenberg block.
 License: MIT License
 Source: https://github.com/suren-atoyan/monaco-react/
 
-= react-codemirror =
-License: MIT License
-Source: https://github.com/uiwjs/react-codemirror
-
-= codemirror/lang-css =
-License: MIT License
-Source: https://github.com/codemirror/lang-css
-
-= codemirror/view =
-License: MIT License
-Source: https://github.com/codemirror/view
-
-
 == Changelog ==
 
 = 0.1.0 =

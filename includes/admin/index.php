@@ -118,7 +118,7 @@ function abc_get_default_option() {
 		),
 		'editor'  => array(
 			'type'    => 'string',
-			'default' => 'CodeMirror',
+			'default' => 'PlainText',
 		),
 	);
 	return $default_option_settings;

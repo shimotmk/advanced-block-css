@@ -9,10 +9,7 @@ import { PlainText } from '@wordpress/block-editor';
 /**
  * External dependencies
  */
-import CodeMirror from '@uiw/react-codemirror';
 import MonacoEditor from '@monaco-editor/react';
-import { css } from '@codemirror/lang-css';
-import { EditorView } from '@codemirror/view';
 
 /**
  * Internal dependencies
@@ -60,19 +57,12 @@ body {
 					selected={ abcOption.editor }
 					options={ [
 						{
-							label: __(
-								'CodeMirror (Default)',
-								'advanced-block-css'
-							),
-							value: 'CodeMirror',
+							label: __( 'PlainText (Default)', 'advanced-block-css' ),
+							value: 'PlainText',
 						},
 						{
 							label: __( 'MonacoEditor', 'advanced-block-css' ),
 							value: 'MonacoEditor',
-						},
-						{
-							label: __( 'PlainText', 'advanced-block-css' ),
-							value: 'PlainText',
 						},
 					] }
 					onChange={ ( newValue ) => {
@@ -80,11 +70,9 @@ body {
 					} }
 				/>
 				<div className="abc-admin-editor-preview-area">
-					{ abcOption.editor === 'CodeMirror' && (
-						<CodeMirror
-							className="abc-editor"
-							height="200px"
-							extensions={ [ css(), EditorView.lineWrapping ] }
+					{ abcOption.editor === 'PlainText' && (
+						<PlainText
+							className="abc-plane-text"
 							value={ abcEditorPreviewValue }
 						/>
 					) }
@@ -97,12 +85,6 @@ body {
 								wordWrap: true,
 								quickSuggestions: false,
 							} }
-							value={ abcEditorPreviewValue }
-						/>
-					) }
-					{ abcOption.editor === 'PlainText' && (
-						<PlainText
-							className="abc-plane-text"
 							value={ abcEditorPreviewValue }
 						/>
 					) }

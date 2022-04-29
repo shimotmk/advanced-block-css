@@ -11,10 +11,7 @@ import { hasBlockSupport } from '@wordpress/blocks';
  * External dependencies
  */
 import { assign } from 'lodash';
-import CodeMirror from '@uiw/react-codemirror';
 import MonacoEditor from '@monaco-editor/react';
-import { css } from '@codemirror/lang-css';
-import { EditorView } from '@codemirror/view';
 
 /**
  * Internal dependencies
@@ -88,18 +85,6 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 							initialOpen={ advancedBlockCss ? true : false }
 						>
 							<div>
-								{ editorOption === 'CodeMirror' && (
-									<CodeMirror
-										className="abc-editor"
-										height="200px"
-										extensions={ [
-											css(),
-											EditorView.lineWrapping,
-										] }
-										value={ advancedBlockCss }
-										onChange={ onChange }
-									/>
-								) }
 								{ editorOption === 'MonacoEditor' && (
 									<MonacoEditor
 										className="abc-editor"

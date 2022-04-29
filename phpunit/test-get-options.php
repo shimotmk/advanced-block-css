@@ -19,7 +19,7 @@ class GetOptionsTest extends WP_UnitTestCase {
 				'option'  => null,
 				'correct' => array(
 					'enqueue' => 'just-before-block',
-					'editor'  => 'CodeMirror',
+					'editor'  => 'PlainText',
 				),
 			),
 			array(
@@ -28,7 +28,7 @@ class GetOptionsTest extends WP_UnitTestCase {
 				),
 				'correct' => array(
 					'enqueue' => 'just-before-block',
-					'editor'  => 'CodeMirror',
+					'editor'  => 'PlainText',
 				),
 			),
 			array(
