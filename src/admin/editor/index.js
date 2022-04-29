@@ -57,7 +57,10 @@ body {
 					selected={ abcOption.editor }
 					options={ [
 						{
-							label: __( 'PlainText (Default)', 'advanced-block-css' ),
+							label: __(
+								'PlainText (Default)',
+								'advanced-block-css'
+							),
 							value: 'PlainText',
 						},
 						{
