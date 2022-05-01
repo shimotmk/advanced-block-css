@@ -19,6 +19,7 @@ import MonacoEditor from '@monaco-editor/react';
 /*globals advancedBlockCssOptions */
 import './style.scss';
 import { ABCIconBold } from '../utils/logo';
+import ABCCodeMirror from './edit.js';
 
 export const inString = ( str, keyword ) => {
 	return str.indexOf( keyword ) !== -1;
@@ -45,6 +46,7 @@ const abcRegisterBlockTypeFuc = ( settings ) => {
 		settings.attributes = assign( settings.attributes, {
 			advancedBlockCss: {
 				type: 'string',
+				default: null,
 			},
 		} );
 	}
@@ -84,28 +86,29 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 							icon={ ABCIconBold }
 							initialOpen={ advancedBlockCss ? true : false }
 						>
-							<div>
-								{ editorOption === 'MonacoEditor' && (
-									<MonacoEditor
-										className="abc-editor"
-										height="200px"
-										defaultLanguage="css"
-										options={ {
-											wordWrap: true,
-											quickSuggestions: false,
-										} }
-										value={ advancedBlockCss }
-										onChange={ onChange }
-									/>
-								) }
-								{ editorOption === 'PlainText' && (
-									<PlainText
-										className="abc-editor abc-plane-text"
-										value={ advancedBlockCss }
-										onChange={ onChange }
-									/>
-								) }
-							</div>
+							{ editorOption === 'CodeMirror' && (
+								<ABCCodeMirror { ...props } />
+							) }
+							{ editorOption === 'MonacoEditor' && (
+								<MonacoEditor
+									className="abc-editor"
+									height="200px"
+									defaultLanguage="css"
+									options={ {
+										wordWrap: true,
+										quickSuggestions: false,
+									} }
+									value={ advancedBlockCss }
+									onChange={ onChange }
+								/>
+							) }
+							{ editorOption === 'PlainText' && (
+								<PlainText
+									className="abc-editor abc-plane-text"
+									value={ advancedBlockCss }
+									onChange={ onChange }
+								/>
+							) }
 						</PanelBody>
 					</InspectorControls>
 				</>

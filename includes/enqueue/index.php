@@ -9,11 +9,18 @@ add_action(
 	'enqueue_block_editor_assets',
 	function () {
 
+		wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
+
+		wp_add_inline_script(
+			'wp-codemirror',
+			'window.CodeMirror = wp.CodeMirror;'
+		);
+
 		$asset_file = include ADVANCED_BLOCK_CSS_DIR_PATH . 'build/advanced-block-css/index.asset.php';
 		wp_enqueue_script(
 			'advanced-block-css-script',
 			ADVANCED_BLOCK_CSS_DIR_URL . 'build/advanced-block-css/index.js',
-			$asset_file['dependencies'],
+			array_merge( $asset_file['dependencies'], array( 'code-editor' ) ),
 			$asset_file['version'],
 			true
 		);
@@ -23,7 +30,9 @@ add_action(
 
 		wp_enqueue_style(
 			'advanced-block-css-style',
-			ADVANCED_BLOCK_CSS_DIR_URL . 'build/advanced-block-css/style-index.css'
+			ADVANCED_BLOCK_CSS_DIR_URL . 'build/advanced-block-css/style-index.css',
+			array( 'code-editor' ),
+			$asset_file['version']
 		);
 	}
 );

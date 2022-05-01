@@ -65,6 +65,13 @@ add_action(
 			return;
 		}
 
+		wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
+
+		wp_add_inline_script(
+			'wp-codemirror',
+			'window.CodeMirror = wp.CodeMirror;'
+		);
+
 		// Automatically load dependencies and version.
 		$asset_file = include ADVANCED_BLOCK_CSS_DIR_PATH . 'build/admin/index.asset.php';
 
@@ -118,7 +125,7 @@ function abc_get_default_option() {
 		),
 		'editor'  => array(
 			'type'    => 'string',
-			'default' => 'PlainText',
+			'default' => 'CodeMirror',
 		),
 	);
 	return $default_option_settings;

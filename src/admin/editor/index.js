@@ -58,9 +58,13 @@ body {
 					options={ [
 						{
 							label: __(
-								'PlainText (Default)',
+								'CodeMirror (Default)',
 								'advanced-block-css'
 							),
+							value: 'CodeMirror',
+						},
+						{
+							label: __( 'PlainText', 'advanced-block-css' ),
 							value: 'PlainText',
 						},
 						{
