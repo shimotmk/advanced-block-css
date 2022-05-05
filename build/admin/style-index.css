@@ -1,0 +1,71 @@
+/*!****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/admin/editor/style.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************/
+.abc-admin-editor-content {
+  display: flex;
+}
+.abc-admin-editor-content .abc-admin-radio {
+  width: 50%;
+}
+.abc-admin-editor-content .abc-admin-editor-preview-area {
+  width: 280px;
+  max-width: 50%;
+}
+.abc-admin-editor-content .abc-admin-editor-preview-area .abc-editor {
+  border: 1px solid #dddddd;
+}
+.abc-admin-editor-content .abc-admin-editor-preview-area .abc-plane-text {
+  padding: 12px;
+  border: 1px solid #dddddd;
+}
+/*!*********************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js??ruleSet[1].rules[3].use[1]!./node_modules/postcss-loader/dist/cjs.js??ruleSet[1].rules[3].use[2]!./node_modules/sass-loader/dist/cjs.js??ruleSet[1].rules[3].use[3]!./src/admin/style.scss ***!
+  \*********************************************************************************************************************************************************************************************************************************************/
+.settings_page_advanced-block-css-admin #wpcontent {
+  padding-left: 0;
+}
+.settings_page_advanced-block-css-admin .privacy-settings-title-section {
+  max-width: 800px;
+  margin: 0 auto;
+  align-items: center;
+  justify-content: space-between;
+}
+.settings_page_advanced-block-css-admin .privacy-settings-title-section h1 {
+  margin: 0.8rem 1rem;
+  padding: 9px 0;
+  text-align: left;
+}
+.settings_page_advanced-block-css-admin .privacy-settings-title-section h1 svg {
+  height: 18px;
+  margin-right: 6px;
+}
+@media only screen and (max-width: 1004px) {
+  .settings_page_advanced-block-css-admin .privacy-settings-title-section {
+    margin: 0 22px;
+  }
+}
+.settings_page_advanced-block-css-admin .privacy-settings-title-section .update-button-area p {
+  margin: 0;
+}
+.settings_page_advanced-block-css-admin .abc-admin-section {
+  background: #fff;
+  padding: 24px;
+  margin-bottom: 24px;
+  box-shadow: rgba(17, 17, 26, 0.1) 0 0 16px;
+}
+.settings_page_advanced-block-css-admin #advanced-block-css-admin ul,
+.settings_page_advanced-block-css-admin #advanced-block-css-admin ul li {
+  list-style-type: disc;
+}
+.settings_page_advanced-block-css-admin #advanced-block-css-admin ul {
+  padding-left: 20px;
+}
+.settings_page_advanced-block-css-admin #advanced-block-css-admin .components-search-control__input {
+  height: 36px;
+  margin-left: 0;
+}
+.settings_page_advanced-block-css-admin .abc-admin-radio {
+  margin-bottom: 16px;
+}
+
+/*# sourceMappingURL=style-index.css.map*/
