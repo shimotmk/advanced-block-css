@@ -5,7 +5,7 @@
  * Description:       Add a simple CSS editor to your Gutenberg block.
  * Requires at least: 5.9
  * Requires PHP:      7.4
- * Version:           0.1.1
+ * Version:           0.1.2
  * Stable tag:        0.1.2
  * Author:            Tomoki Shimomura
  * Author URI:
