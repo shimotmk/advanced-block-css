@@ -23,6 +23,8 @@ add_action(
 				'advanced-block-css'
 			);
 
+			$abc_update_checker->setBranch('main');
+
 			$abc_update_checker->getVcsApi()->enableReleaseAssets();
 		}
 	}
