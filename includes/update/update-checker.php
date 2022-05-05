@@ -8,7 +8,7 @@
 /**
  * Require
  */
-require ADVANCED_BLOCK_CSS_DIR_PATH . 'plugin-update-checker/plugin-update-checker.php';
+require ADVANCED_BLOCK_CSS_DIR_PATH . 'includes/update/plugin-update-checker/plugin-update-checker.php';
 
 $abc_update_checker = Puc_v4_Factory::buildUpdateChecker(
 	'https://github.com/shimotmk/advanced-block-css/',
