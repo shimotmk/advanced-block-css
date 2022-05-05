@@ -23,9 +23,6 @@ add_action(
 				'advanced-block-css'
 			);
 
-			// Set the branch that contains the stable release.
-			$abc_update_checker->setBranch( 'main' );
-
 			$abc_update_checker->getVcsApi()->enableReleaseAssets();
 		}
 	}
