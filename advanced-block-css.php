@@ -19,5 +19,6 @@ defined( 'ABSPATH' ) || exit;
 define( 'ADVANCED_BLOCK_CSS_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'ADVANCED_BLOCK_CSS_DIR_URL', plugin_dir_url( __FILE__ ) );
 
+require_once ADVANCED_BLOCK_CSS_DIR_PATH . 'includes/update/update-checker.php';
 require_once ADVANCED_BLOCK_CSS_DIR_PATH . 'includes/admin.php';
 require_once ADVANCED_BLOCK_CSS_DIR_PATH . 'includes/enqueue/index.php';
