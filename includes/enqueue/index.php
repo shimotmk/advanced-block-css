@@ -62,6 +62,23 @@ function abc_minify_css( $css ) {
 }
 
 /**
+ * Enqueue block_support_script
+ *
+ * @param string $script script.
+ * @param int    $priority To set the priority for the add_action.
+ */
+function abc_enqueue_block_support_scripts( $script, $priority = 10 ) {
+	$action_hook_name = 'wp_footer';
+	add_action(
+		$action_hook_name,
+		static function () use ( $script ) {
+			echo "<script>$script</script>\n";
+		},
+		$priority
+	);
+}
+
+/**
  * カスタムCSSをサポートしているかどうか
  *
  * @param string $block_name block_name.
@@ -149,6 +166,11 @@ add_filter(
 		}
 		$css = abc_minify_css( $css );
 		wp_enqueue_block_support_styles( $css );
+
+		$javascript = $block['attrs']['advancedBlockJavaScript'];
+		if ( $javascript ) {
+			abc_enqueue_block_support_scripts( $javascript );
+		}
 		return $block_content;
 	},
 	10,

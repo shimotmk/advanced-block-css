@@ -7,7 +7,7 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { addFilter } from '@wordpress/hooks';
-import { PanelBody } from '@wordpress/components';
+import { PanelBody, TextareaControl } from '@wordpress/components';
 import {
 	InspectorControls,
 	transformStyles,
@@ -72,7 +72,11 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 			return <BlockEdit { ...props } />;
 		}
 
-		const { advancedBlockCss, className } = attributes;
+		const {
+			advancedBlockCss,
+			advancedBlockJavaScript,
+			className,
+		} = attributes;
 		// 追加CSSを半角文字列で分けて配列化
 		const nowClassArray = className ? className.split( ' ' ) : [];
 
@@ -122,6 +126,19 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 						initialOpen={ advancedBlockCss ? true : false }
 					>
 						<ABCCodeMirror { ...props } />
+						<p>advancedBlockJavaScript</p>
+						<TextareaControl
+							value={
+								advancedBlockJavaScript
+									? advancedBlockJavaScript
+									: ''
+							}
+							onChange={ ( value ) => {
+								setAttributes( {
+									advancedBlockJavaScript: value,
+								} );
+							} }
+						/>
 					</PanelBody>
 				</InspectorControls>
 			</>
