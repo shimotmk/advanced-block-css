@@ -61,53 +61,94 @@ function abc_minify_css( $css ) {
 	return wp_strip_all_tags( $css );
 }
 
-$advanced_block_css_list = '';
-add_action(
-	'wp_enqueue_scripts',
-	function() {
-		add_filter(
-			'render_block',
-			function ( $block_content, $block ) {
-				if ( isset( $block['attrs']['advancedBlockCss'] ) && '' !== $block['attrs']['advancedBlockCss'] ) {
-					$css        = $block['attrs']['advancedBlockCss'];
-					$abc_option = abc_get_option();
-					// インラインで出力するときのcss.
-					global $advanced_block_css_list;
-
-					// just-before-blockで読み込む場合.
-					if ( empty( $abc_option['enqueue'] ) || 'just-before-block' === $abc_option['enqueue'] ) {
-						// ブロック直前にインラインで読み込む.
-						return '<style>' . $css . '</style>' . $block_content;
-					} else {
-						// headにインラインで出力するとき
-						// 使用しているcssをまとめる.
-						$advanced_block_css_list .= $css;
-						wp_register_style( 'advanced-block-css-style', false );
-						wp_enqueue_style( 'advanced-block-css-style' );
-						wp_add_inline_style( 'advanced-block-css-style', abc_minify_css( $advanced_block_css_list ) );
-						return $block_content;
-					}
-				}
-				return $block_content;
-			},
-			10,
-			2
-		);
+/**
+ * カスタムCSSをサポートしているかどうか
+ *
+ * @param string $block_name block_name.
+ * @return string
+ */
+function abc_has_custom_css_support( $block_name ) {
+	if ( empty( $block_name ) ) {
+		return false;
 	}
+
+	$block_type = WP_Block_Type_Registry::get_instance()->get_registered( $block_name );
+	if ( ! block_has_support( $block_type, array( 'customClassName' ), true ) ) {
+		return false;
+	}
+
+	return true;
+};
+
+/**
+ * 各ブロックにadvancedBlockCssのattributesを追加する
+ *
+ * @param string $settings settings.
+ * @param array  $metadata metadata.
+ * @return string
+ */
+add_filter(
+	'block_type_metadata_settings',
+	function ( $settings, $metadata ) {
+		if ( ! abc_has_custom_css_support( $metadata['name'] ) ) {
+			return $settings;
+		}
+
+		$attributes = array();
+		if ( ! empty( $settings['attributes'] ) ) {
+			$attributes = $settings['attributes'];
+		}
+		$add_attributes = array(
+			'advancedBlockCss'        => array(
+				'type'    => 'string',
+				'default' => '',
+			),
+			'advancedBlockAdminCss'   => array(
+				'type'    => 'string',
+				'default' => '',
+			),
+			'advancedBlockJavaScript' => array(
+				'type'    => 'string',
+				'default' => '',
+			),
+		);
+
+		$settings['attributes'] = array_merge(
+			$attributes,
+			$add_attributes
+		);
+		return $settings;
+	},
+	10,
+	2
 );
 
 /**
- * ブロックテーマのときはheadで出力がなぜか出来ないのでブロック直前に出力する
+ * Render Custom Css Extension css
+ *
+ * @param string $block_content block_content.
+ * @param array  $block block.
+ * @return string
  */
 add_filter(
 	'render_block',
 	function ( $block_content, $block ) {
-		if ( wp_is_block_theme() ) {
-			if ( isset( $block['attrs']['advancedBlockCss'] ) && '' !== $block['attrs']['advancedBlockCss'] ) {
-				$css = $block['attrs']['advancedBlockCss'];
-				return '<style>' . $css . '</style>' . $block_content;
-			}
+		if ( ! abc_has_custom_css_support( $block['blockName'] ) ) {
+			return $block_content;
 		}
+
+		if ( empty( $block['attrs']['advancedBlockCss'] ) ) {
+			return $block_content;
+		}
+
+		$css = $block['attrs']['advancedBlockCss'];
+		if ( strpos( $css, 'selector' ) !== false ) {
+			$unique_class  = wp_unique_id( 'custom_block_id_' );
+			$css           = preg_replace( '/selector/', '.' . $unique_class, $css );
+			$block_content = preg_replace( '/(class="[^"]*)custom_block_id([^"]*")/', '$1' . $unique_class . '$2', $block_content, 1 );
+		}
+		$css = abc_minify_css( $css );
+		wp_enqueue_block_support_styles( $css );
 		return $block_content;
 	},
 	10,
