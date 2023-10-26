@@ -26,7 +26,7 @@ export const hasCustomCssSupport = ( blockName ) => {
 	return true;
 };
 
-export const emptyStringToUndefined = (string) => {
+export const emptyStringToUndefined = ( string ) => {
 	return string !== '' ? string : undefined;
 };
 
@@ -64,9 +64,7 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 			return <BlockEdit { ...props } />;
 		}
 
-		const {
-			advancedBlockJavaScript,
-		} = attributes;
+		const { advancedBlockJavaScript } = attributes;
 
 		return (
 			<>
@@ -88,7 +86,9 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 							}
 							onChange={ ( value ) => {
 								setAttributes( {
-									advancedBlockJavaScript: emptyStringToUndefined(value),
+									advancedBlockJavaScript: emptyStringToUndefined(
+										value
+									),
 								} );
 							} }
 						/>

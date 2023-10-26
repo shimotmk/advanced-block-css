@@ -157,9 +157,9 @@ add_filter(
 		if ( ! empty( $block['attrs']['advancedBlockCss'] ) ) {
 			$css = $block['attrs']['advancedBlockCss'];
 			if ( strpos( $css, 'selector' ) !== false ) {
-				$unique_class  = wp_unique_id( 'custom_block_id_' );
-				$css           = preg_replace( '/selector/', '.' . $unique_class, $css );
-				$processor = new WP_HTML_Tag_Processor($block_content);
+				$unique_class = wp_unique_id( 'custom_block_id_' );
+				$css          = preg_replace( '/selector/', '.' . $unique_class, $css );
+				$processor    = new WP_HTML_Tag_Processor( $block_content );
 				$processor->next_tag();
 				$processor->add_class( $unique_class );
 			}
