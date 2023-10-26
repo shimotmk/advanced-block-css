@@ -5,7 +5,7 @@ let entries = {}; // ビルドするファイル群
 const srcDir = './src';
 const entryDir = [
   'admin',
-  'advanced-block-css'
+  'block-code-snippets'
 ];
 entryDir.forEach((key) => {
   entries[key + '/index'] = path.resolve(srcDir, key);

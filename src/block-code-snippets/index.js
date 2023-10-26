@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import classnames from 'classnames';
-
-/**
  * WordPress dependencies
  */
 import { addFilter } from '@wordpress/hooks';
@@ -15,7 +10,7 @@ import {
 } from '@wordpress/block-editor';
 import { createHigherOrderComponent } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
-import { useEffect, useContext, createPortal } from '@wordpress/element';
+import { useContext, createPortal } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -24,18 +19,15 @@ import './style.scss';
 import { ABCIconBold } from '../utils/logo';
 import ABCCodeMirror from './edit.js';
 
-export const existsCss = ( css ) => {
-	// cssが存在するかつ空白文字のみではない
-	return css && css.match( /\S/g );
-};
-export const customCssSelectorRegex = /selector/g;
-
 export const hasCustomCssSupport = ( blockName ) => {
-	// 追加CSSクラスを許可していない場合はfalse
 	if ( ! hasBlockSupport( blockName, 'customClassName', true ) ) {
 		return false;
 	}
 	return true;
+};
+
+export const emptyStringToUndefined = (string) => {
+	return string !== '' ? string : undefined;
 };
 
 /**
@@ -67,53 +59,14 @@ const abcRegisterBlockTypeFuc = ( settings ) => {
  */
 const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
-		const { name, attributes, setAttributes, isSelected } = props;
-		if ( ! hasCustomCssSupport( name ) || ! isSelected ) {
+		const { name, attributes, setAttributes } = props;
+		if ( ! hasCustomCssSupport( name ) ) {
 			return <BlockEdit { ...props } />;
 		}
 
 		const {
-			advancedBlockCss,
 			advancedBlockJavaScript,
-			className,
 		} = attributes;
-		// 追加CSSを半角文字列で分けて配列化
-		const nowClassArray = className ? className.split( ' ' ) : [];
-
-		// 追加 CSS クラスにcustom_block_idがあるか
-		const existsCustomCssClass = ( _nowClassArray ) => {
-			return _nowClassArray.indexOf( 'custom_block_id' ) !== -1
-				? true
-				: false;
-		};
-
-		// カスタムCSSにselectorがあるか
-		const existsCustomCssSelector = ( customCss ) => {
-			return customCssSelectorRegex.test( customCss );
-		};
-
-		// CustomCssが変更されたとき
-		useEffect( () => {
-			if (
-				! existsCustomCssClass( nowClassArray ) &&
-				existsCustomCssSelector( advancedBlockCss )
-			) {
-				// カスタムCSS用クラスを追加
-				setAttributes( {
-					className: classnames( nowClassArray, `custom_block_id` ),
-				} );
-			}
-
-			if (
-				existsCustomCssClass( nowClassArray ) &&
-				! existsCustomCssSelector( advancedBlockCss )
-			) {
-				// カスタムCSS用クラスを削除
-				const deleteClass = nowClassArray.indexOf( 'custom_block_id' );
-				nowClassArray.splice( deleteClass, 1 );
-				setAttributes( { className: classnames( nowClassArray ) } );
-			}
-		}, [ advancedBlockCss ] );
 
 		return (
 			<>
@@ -121,9 +74,9 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 				<InspectorControls>
 					<PanelBody
 						className={ 'abc-editor-panel-body' }
-						title={ `Advanced Block CSS` }
+						title={ `Block Code Snippets` }
 						icon={ ABCIconBold }
-						initialOpen={ advancedBlockCss ? true : false }
+						initialOpen={ false }
 					>
 						<ABCCodeMirror { ...props } />
 						<p>advancedBlockJavaScript</p>
@@ -135,7 +88,7 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 							}
 							onChange={ ( value ) => {
 								setAttributes( {
-									advancedBlockJavaScript: value,
+									advancedBlockJavaScript: emptyStringToUndefined(value),
 								} );
 							} }
 						/>
@@ -162,7 +115,7 @@ const abcBlockListBlockFun = createHigherOrderComponent( ( BlockListBlock ) => {
 		let cssTag = advancedBlockCss ? advancedBlockCss : '';
 		if ( cssTag ) {
 			cssTag = advancedBlockCss.replace(
-				customCssSelectorRegex,
+				/selector/g,
 				`#block-${ clientId }`
 			);
 		}
@@ -188,18 +141,18 @@ const abcBlockListBlockFun = createHigherOrderComponent( ( BlockListBlock ) => {
 
 addFilter(
 	'blocks.registerBlockType',
-	'advanced-block-css/register-block-type',
+	'block-code-snippets/register-block-type',
 	abcRegisterBlockTypeFuc
 );
 
 addFilter(
 	'editor.BlockEdit',
-	'advanced-block-css/block-edit',
+	'block-code-snippets/block-edit',
 	abcBlockEditFunc
 );
 
 addFilter(
 	'editor.BlockListBlock',
-	'advanced-block-css/block-list-block',
+	'block-code-snippets/block-list-block',
 	abcBlockListBlockFun
 );

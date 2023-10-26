@@ -41,12 +41,12 @@ export default function ExportSection() {
 	return (
 		<>
 			<h2>
-				{ __( 'Advanced Block CSS Export(β)', 'advanced-block-css' ) }
+				{ __( 'Block Code Snippets Export(β)', 'block-code-snippets' ) }
 			</h2>
 			<p>
 				{ __(
-					'You can export the styles you have added with Advanced Block CSS for each page.',
-					'advanced-block-css'
+					'You can export the styles you have added with Block Code Snippets for each page.',
+					'block-code-snippets'
 				) }
 			</p>
 			<SearchControl onChange={ setSearchTerm } value={ searchTerm } />
@@ -60,7 +60,7 @@ function PagesList( { hasResolved, pages } ) {
 		return <Spinner />;
 	}
 	if ( ! pages?.length ) {
-		return <div>{ __( 'No results', 'advanced-block-css' ) }</div>;
+		return <div>{ __( 'No results', 'block-code-snippets' ) }</div>;
 	}
 
 	return (
@@ -68,9 +68,9 @@ function PagesList( { hasResolved, pages } ) {
 			<table className="wp-list-table widefat fixed striped table-view-list">
 				<thead>
 					<tr>
-						<td>{ __( 'Title', 'advanced-block-css' ) }</td>
+						<td>{ __( 'Title', 'block-code-snippets' ) }</td>
 						<td>
-							{ __( 'Export CSS File', 'advanced-block-css' ) }
+							{ __( 'Export CSS File', 'block-code-snippets' ) }
 						</td>
 					</tr>
 				</thead>
@@ -102,7 +102,7 @@ function PagesList( { hasResolved, pages } ) {
 									<td>
 										{ __(
 											'Not used',
-											'advanced-block-css'
+											'block-code-snippets'
 										) }
 									</td>
 								);

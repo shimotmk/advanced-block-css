@@ -24,7 +24,7 @@ export default function UpdateButton() {
 		api.loadPromise.then( (/*response*/) => {
 			// console.log( response );
 			const model = new api.models.Settings( {
-				advanced_block_css_options: abcOption,
+				block_code_snippets_options: abcOption,
 			} );
 			const save = model.save();
 
@@ -61,10 +61,10 @@ export default function UpdateButton() {
 					onClick={ onClickUpdate }
 					isBusy={ isLoading }
 				>
-					{ __( 'Save setting', 'advanced-block-css' ) }
+					{ __( 'Save setting', 'block-code-snippets' ) }
 				</Button>
 				{ isSaveSuccess === false && (
-					<p>{ __( 'Failed to save.', 'advanced-block-css' ) }</p>
+					<p>{ __( 'Failed to save.', 'block-code-snippets' ) }</p>
 				) }
 			</div>
 		</>

@@ -12,11 +12,11 @@ import './style.scss';
 export default function ActivationSection() {
 	return (
 		<>
-			<h2>{ __( 'Activation Settings', 'advanced-block-css' ) }</h2>
+			<h2>{ __( 'Activation Settings', 'block-code-snippets' ) }</h2>
 			<p>
 				{ __(
-					'You can select the block that activates the Advanced Block CSS.',
-					'advanced-block-css'
+					'You can select the block that activates the Block Code Snippets.',
+					'block-code-snippets'
 				) }
 			</p>
 			<div className="abc-admin-activation-block">

@@ -9,13 +9,10 @@ import { __ } from '@wordpress/i18n';
  */
 import { ABCIconBold } from '../utils/logo';
 import UpdateButton from './update';
-import EditorSection from './editor';
-import EnqueueSection from './enqueue';
 // import ActivationSection from './activation';
 import ExportSection from './export';
 import './style.scss';
 /*globals advancedBlockCssOptions */
-/*globals ABCSCRIPT */
 
 export const AdminContext = createContext();
 
@@ -23,8 +20,6 @@ function AbcAdmin() {
 	// 初期値を設定する
 	const [ isLoading, setIsLoading ] = useState( false );
 	const [ abcOption, setAbcOption ] = useState( advancedBlockCssOptions );
-
-	// console.log( ABCSCRIPT.isBlockTheme );
 
 	return (
 		<>
@@ -42,23 +37,14 @@ function AbcAdmin() {
 						<h1>
 							{ ABCIconBold }
 							{ __(
-								'Advanced Block CSS Settings',
-								'advanced-block-css'
+								'Block Code Snippets Settings',
+								'block-code-snippets'
 							) }
 						</h1>
 						<UpdateButton />
 					</div>
 				</div>
 				<div className="privacy-settings-body">
-					<section className="abc-admin-section">
-						<EditorSection />
-					</section>
-					{ /* block themeの場合はブロック直前にインラインで読み込むのでEnqueueSectionは表示しない */ }
-					{ ! ABCSCRIPT.isBlockTheme && (
-						<section className="abc-admin-section">
-							<EnqueueSection />
-						</section>
-					) }
 					{ /* <section className="abc-admin-section">
 						<ActivationSection />
 					</section> */ }
@@ -76,7 +62,7 @@ window.addEventListener(
 	function () {
 		render(
 			<AbcAdmin />,
-			document.querySelector( '#advanced-block-css-admin' )
+			document.querySelector( '#block-code-snippets-admin' )
 		);
 	},
 	false

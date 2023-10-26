@@ -2,7 +2,7 @@
 /**
  * Enqueue Assets
  *
- * @package advanced-block-css
+ * @package block-code-snippets
  */
 
 add_action(
@@ -16,21 +16,21 @@ add_action(
 			'window.CodeMirror = wp.CodeMirror;'
 		);
 
-		$asset_file = include ADVANCED_BLOCK_CSS_DIR_PATH . 'build/advanced-block-css/index.asset.php';
+		$asset_file = include BLOCK_CODE_SNIPPETS_DIR_PATH . 'build/block-code-snippets/index.asset.php';
 		wp_enqueue_script(
-			'advanced-block-css-script',
-			ADVANCED_BLOCK_CSS_DIR_URL . 'build/advanced-block-css/index.js',
+			'block-code-snippets-script',
+			BLOCK_CODE_SNIPPETS_DIR_URL . 'build/block-code-snippets/index.js',
 			array_merge( $asset_file['dependencies'], array( 'code-editor' ) ),
 			$asset_file['version'],
 			true
 		);
 
-		$abc_option = get_option( 'advanced_block_css_options' );
-		wp_localize_script( 'advanced-block-css-script', 'advancedBlockCssOptions', $abc_option );
+		$abc_option = get_option( 'block_code_snippets_options' );
+		wp_localize_script( 'block-code-snippets-script', 'advancedBlockCssOptions', $abc_option );
 
 		wp_enqueue_style(
-			'advanced-block-css-style',
-			ADVANCED_BLOCK_CSS_DIR_URL . 'build/advanced-block-css/style-index.css',
+			'block-code-snippets-style',
+			BLOCK_CODE_SNIPPETS_DIR_URL . 'build/block-code-snippets/style-index.css',
 			array( 'code-editor' ),
 			$asset_file['version']
 		);
@@ -154,22 +154,25 @@ add_filter(
 			return $block_content;
 		}
 
-		if ( empty( $block['attrs']['advancedBlockCss'] ) ) {
-			return $block_content;
+		if ( ! empty( $block['attrs']['advancedBlockCss'] ) ) {
+			$css = $block['attrs']['advancedBlockCss'];
+			if ( strpos( $css, 'selector' ) !== false ) {
+				$unique_class  = wp_unique_id( 'custom_block_id_' );
+				$css           = preg_replace( '/selector/', '.' . $unique_class, $css );
+				$processor = new WP_HTML_Tag_Processor($block_content);
+				$processor->next_tag();
+				$processor->add_class( $unique_class );
+			}
+			$css = abc_minify_css( $css );
+			wp_enqueue_block_support_styles( $css );
+			return $processor->get_updated_html();
 		}
 
-		$css = $block['attrs']['advancedBlockCss'];
-		if ( strpos( $css, 'selector' ) !== false ) {
-			$unique_class  = wp_unique_id( 'custom_block_id_' );
-			$css           = preg_replace( '/selector/', '.' . $unique_class, $css );
-			$block_content = preg_replace( '/(class="[^"]*)custom_block_id([^"]*")/', '$1' . $unique_class . '$2', $block_content, 1 );
-		}
-		$css = abc_minify_css( $css );
-		wp_enqueue_block_support_styles( $css );
-
-		$javascript = $block['attrs']['advancedBlockJavaScript'];
-		if ( $javascript ) {
-			abc_enqueue_block_support_scripts( $javascript );
+		if ( ! empty( $block['attrs']['advancedBlockJavaScript'] ) ) {
+			$javascript = $block['attrs']['advancedBlockJavaScript'];
+			if ( $javascript ) {
+				abc_enqueue_block_support_scripts( $javascript );
+			}
 		}
 		return $block_content;
 	},

@@ -52,7 +52,7 @@ export default function CSSExport( { page } ) {
 	}
 	return (
 		<Button icon={ download } onClick={ handleExport }>
-			{ __( 'Export', 'advanced-block-css' ) }
+			{ __( 'Export', 'block-code-snippets' ) }
 		</Button>
 	);
 }

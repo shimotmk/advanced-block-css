@@ -2,7 +2,7 @@
 /**
  * PHPUnit bootstrap file
  *
- * @package advanced-block-css
+ * @package block-code-snippets
  */
 
 // Require composer dependencies.
@@ -45,7 +45,7 @@ define( 'GUTENBERG_LOAD_VENDOR_SCRIPTS', false );
  * テストするプラグインを読み込み
  */
 function _manually_load_plugin() {
-	require_once dirname( __DIR__ ) . '/advanced-block-css.php';
+	require_once dirname( __DIR__ ) . '/block-code-snippets.php';
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
 

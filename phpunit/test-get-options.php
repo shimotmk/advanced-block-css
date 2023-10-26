@@ -2,7 +2,7 @@
 /**
  * Test Get Option
  *
- * @package advanced-block-css
+ * @package block-code-snippets
  */
 
 /**
@@ -68,9 +68,9 @@ class GetOptionsTest extends WP_UnitTestCase {
 		foreach ( $test_data as $test_value ) {
 
 			if ( empty( $test_value['option'] ) ) {
-				delete_option( 'advanced_block_css_options' );
+				delete_option( 'block_code_snippets_options' );
 			} else {
-				update_option( 'advanced_block_css_options', $test_value['option'] );
+				update_option( 'block_code_snippets_options', $test_value['option'] );
 			}
 
 			$return  = abc_get_option();

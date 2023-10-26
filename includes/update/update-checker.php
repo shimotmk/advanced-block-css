@@ -2,7 +2,7 @@
 /**
  * Update File
  *
- * @package advanced-block-css
+ * @package block-code-snippets
  */
 
 add_action(
@@ -13,14 +13,14 @@ add_action(
 		 * Require
 		 */
 		if ( ! class_exists( '\Puc_v4_Factory' ) ) {
-			require ADVANCED_BLOCK_CSS_DIR_PATH . 'includes/update/plugin-update-checker/plugin-update-checker.php';
+			require BLOCK_CODE_SNIPPETS_DIR_PATH . 'includes/update/plugin-update-checker/plugin-update-checker.php';
 		}
 
 		if ( class_exists( '\Puc_v4_Factory' ) ) {
 			$abc_update_checker = Puc_v4_Factory::buildUpdateChecker(
-				'https://github.com/shimotmk/advanced-block-css/',
-				ADVANCED_BLOCK_CSS_DIR_PATH . 'advanced-block-css.php',
-				'advanced-block-css'
+				'https://github.com/shimotmk/block-code-snippets/',
+				BLOCK_CODE_SNIPPETS_DIR_PATH . 'block-code-snippets.php',
+				'block-code-snippets'
 			);
 
 			$abc_update_checker->setBranch( 'main' );
