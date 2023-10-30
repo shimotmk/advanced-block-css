@@ -155,7 +155,7 @@ add_filter(
 		$javascript   = ! empty( $block['attrs']['advancedBlockJavaScript'] ) ? $block['attrs']['advancedBlockJavaScript'] : null;
 
 		if ( ! empty( $css ) || ! empty( $javascript ) ) {
-			$unique_class = wp_unique_id( 'custom_block_id_' );
+			$unique_class = wp_unique_id( 'bcs_id_' );
 		}
 
 		if ( ! empty( $css ) ) {
