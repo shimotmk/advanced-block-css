@@ -44,9 +44,6 @@ const abcRegisterBlockTypeFuc = ( settings ) => {
 		advancedBlockCss: {
 			type: 'string',
 		},
-		advancedBlockAdminCss: {
-			type: 'string',
-		},
 		advancedBlockJavaScript: {
 			type: 'string',
 		},

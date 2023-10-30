@@ -120,10 +120,6 @@ add_filter(
 				'type'    => 'string',
 				'default' => '',
 			),
-			'advancedBlockAdminCss'   => array(
-				'type'    => 'string',
-				'default' => '',
-			),
 			'advancedBlockJavaScript' => array(
 				'type'    => 'string',
 				'default' => '',
