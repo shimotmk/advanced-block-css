@@ -150,26 +150,36 @@ add_filter(
 			return $block_content;
 		}
 
-		if ( ! empty( $block['attrs']['advancedBlockCss'] ) ) {
-			$css = $block['attrs']['advancedBlockCss'];
+		$unique_class = '';
+		$css          = ! empty( $block['attrs']['advancedBlockCss'] ) ? $block['attrs']['advancedBlockCss'] : null;
+		$javascript   = ! empty( $block['attrs']['advancedBlockJavaScript'] ) ? $block['attrs']['advancedBlockJavaScript'] : null;
+
+		if ( ! empty( $css ) || ! empty( $javascript ) ) {
+			$unique_class = wp_unique_id( 'custom_block_id_' );
+		}
+
+		if ( ! empty( $css ) ) {
 			if ( strpos( $css, 'selector' ) !== false ) {
-				$unique_class = wp_unique_id( 'custom_block_id_' );
-				$css          = preg_replace( '/selector/', '.' . $unique_class, $css );
-				$processor    = new WP_HTML_Tag_Processor( $block_content );
-				$processor->next_tag();
-				$processor->add_class( $unique_class );
+				$css = preg_replace( '/selector/', '.' . $unique_class, $css );
 			}
 			$css = abc_minify_css( $css );
 			wp_enqueue_block_support_styles( $css );
+		}
+
+		if ( ! empty( $javascript ) ) {
+			if ( strpos( $javascript, 'selector' ) !== false ) {
+				$javascript = preg_replace( '/selector/', '.' . $unique_class, $javascript );
+			}
+			abc_enqueue_block_support_scripts( $javascript );
+		}
+
+		if ( ! empty( $css ) || ! empty( $javascript ) ) {
+			$processor = new WP_HTML_Tag_Processor( $block_content );
+			$processor->next_tag();
+			$processor->add_class( $unique_class );
 			return $processor->get_updated_html();
 		}
 
-		if ( ! empty( $block['attrs']['advancedBlockJavaScript'] ) ) {
-			$javascript = $block['attrs']['advancedBlockJavaScript'];
-			if ( $javascript ) {
-				abc_enqueue_block_support_scripts( $javascript );
-			}
-		}
 		return $block_content;
 	},
 	10,
