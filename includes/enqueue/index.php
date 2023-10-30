@@ -62,6 +62,27 @@ function abc_minify_css( $css ) {
 }
 
 /**
+ * Minify JS
+ *
+ * @see https://shimotsuki.wwwxyz.jp/20200930-650
+ *
+ * @param string $js js.
+ */
+function abc_minify_js( $js ) {
+	$js_replaces = array();
+		// (1) JSの正規表現前後の空白文字列の除去
+	$js_replaces['/([(+=])\s*(\/(?:(?!(?<!\\\)\/).)+\/[dgimsuy]*)\s*([)+,.;])/s'] = '${1}${2}${3}';
+	// (2) コメントの除去
+	$js_replaces['/(\/\*[!@].*?\*\/|[(+=]\/(?:(?!(?<!\\\)\/).)+\/[dgimsuy]*[)+,.;]|\"(?:(?!(?<!\\\)\").)*\"|\'(?:(?!(?<!\\\)\').)*\'|\`(?:(?!(?<!\\\)\`).)*\`)|\/\*.*?\*\/|\/\/[^\r\n]+[\r\n]/s'] = '${1}';
+	// (3) 1つ以上連続する空白文字列の置換
+	$js_replaces['/(\/\*[!@].*?\*\/|[(+=]\/(?:(?!(?<!\\\)\/).)+\/[dgimsuy]*[)+,.;]|\"(?:(?!(?<!\\\)\").)*\"|\'(?:(?!(?<!\\\)\').)*\'|\`(?:(?!(?<!\\\)\`).)*\`)\s*|\s+/s'] = '${1} ';
+	// (4) 記号前後の半角スペースの除去
+	$js_replaces['/(\/\*[!@].*?\*\/|[(+=]\/(?:(?!(?<!\\\)\/).)+\/[dgimsuy]*[)+,.;]|\"(?:(?!(?<!\\\)\").)*\"|\'(?:(?!(?<!\\\)\').)*\'|\`(?:(?!(?<!\\\)\`).)*\`) | ([!#$%&)*+,\-.\/:;<=>?@\]^_|}~]) | ([!#$%&)*,.\/:;<=>?@\]^_|}~]|\+(?!\+)|-(?!-)|\z)|([!#$%&()*+,\-.\/:;<=>?@\[\]^_{|}~]|\A) /s'] = '${1}${2}${3}${4}';
+	$js = preg_replace( array_keys( $js_replaces ), array_values( $js_replaces ), $js );
+	return $js;
+}
+
+/**
  * Enqueue block_support_script
  *
  * @param string $script script.
@@ -98,7 +119,7 @@ function abc_has_custom_css_support( $block_name ) {
 };
 
 /**
- * 各ブロックにadvancedBlockCssのattributesを追加する
+ * Add attributes
  *
  * @param string $settings settings.
  * @param array  $metadata metadata.
@@ -170,6 +191,7 @@ add_filter(
 			if ( strpos( $javascript, 'selector' ) !== false ) {
 				$javascript = preg_replace( '/selector/', '.' . $unique_class, $javascript );
 			}
+			$javascript = abc_minify_js( $javascript );
 			abc_enqueue_block_support_scripts( $javascript );
 		}
 
