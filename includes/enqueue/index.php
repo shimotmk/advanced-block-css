@@ -9,18 +9,11 @@ add_action(
 	'enqueue_block_editor_assets',
 	function () {
 
-		wp_enqueue_code_editor( array( 'type' => 'text/css' ) );
-
-		wp_add_inline_script(
-			'wp-codemirror',
-			'window.CodeMirror = wp.CodeMirror;'
-		);
-
 		$asset_file = include BLOCK_CODE_SNIPPETS_DIR_PATH . 'build/block-code-snippets/index.asset.php';
 		wp_enqueue_script(
 			'block-code-snippets-script',
 			BLOCK_CODE_SNIPPETS_DIR_URL . 'build/block-code-snippets/index.js',
-			array_merge( $asset_file['dependencies'], array( 'code-editor' ) ),
+			$asset_file['dependencies'],
 			$asset_file['version'],
 			true
 		);
@@ -93,7 +86,7 @@ function abc_enqueue_block_support_scripts( $script, $priority = 10 ) {
 	add_action(
 		$action_hook_name,
 		static function () use ( $script ) {
-			echo "<script>$script</script>\n";
+			echo "<script>(function() { $script })();</script>\n";
 		},
 		$priority
 	);

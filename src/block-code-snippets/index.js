@@ -2,7 +2,7 @@
  * WordPress dependencies
  */
 import { addFilter } from '@wordpress/hooks';
-import { PanelBody, TextareaControl } from '@wordpress/components';
+import { PanelBody } from '@wordpress/components';
 import {
 	InspectorControls,
 	transformStyles,
@@ -17,7 +17,14 @@ import { useContext, createPortal } from '@wordpress/element';
  */
 import './style.scss';
 import { ABCIconBold } from '../utils/logo';
-import ABCCodeMirror from './edit.js';
+
+/**
+ * External dependencies
+ */
+import CodeMirror from '@uiw/react-codemirror';
+import { css } from '@codemirror/lang-css';
+import { javascript } from '@codemirror/lang-javascript';
+import { EditorView } from '@codemirror/view';
 
 export const hasCustomCssSupport = ( blockName ) => {
 	if ( ! hasBlockSupport( blockName, 'customClassName', true ) ) {
@@ -35,7 +42,7 @@ export const emptyStringToUndefined = ( string ) => {
  *
  * @param {string} settings
  */
-const abcRegisterBlockTypeFuc = ( settings ) => {
+const bcsRegisterBlockTypeFuc = ( settings ) => {
 	if ( ! hasCustomCssSupport( settings.name ) ) {
 		return settings;
 	}
@@ -54,14 +61,14 @@ const abcRegisterBlockTypeFuc = ( settings ) => {
 /**
  * edit.js
  */
-const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
+const bcsBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 	return ( props ) => {
 		const { name, attributes, setAttributes } = props;
 		if ( ! hasCustomCssSupport( name ) ) {
 			return <BlockEdit { ...props } />;
 		}
 
-		const { advancedBlockJavaScript } = attributes;
+		const { advancedBlockCss, advancedBlockJavaScript } = attributes;
 
 		return (
 			<>
@@ -73,14 +80,31 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 						icon={ ABCIconBold }
 						initialOpen={ false }
 					>
-						<ABCCodeMirror { ...props } />
-						<p>advancedBlockJavaScript</p>
-						<TextareaControl
+						<p>CSS</p>
+						<CodeMirror
+							height="200px"
+							// https://uiwjs.github.io/react-codemirror/#/extensions/color
+							extensions={ [
+								css(),
+								EditorView.lineWrapping,
+							] }
+							value={ advancedBlockCss ? advancedBlockCss : '' }
+							onChange={(value) => {
+								setAttributes({ advancedBlockCss: emptyStringToUndefined(value) })
+							}}
+						/>
+						<p>JavaScript</p>
+						<CodeMirror
 							value={
 								advancedBlockJavaScript
 									? advancedBlockJavaScript
 									: ''
 							}
+							height="200px"
+							extensions={[
+								javascript(),
+								EditorView.lineWrapping,
+							]}
 							onChange={ ( value ) => {
 								setAttributes( {
 									advancedBlockJavaScript: emptyStringToUndefined(
@@ -99,7 +123,7 @@ const abcBlockEditFunc = createHigherOrderComponent( ( BlockEdit ) => {
 /**
  * edit.js
  */
-const abcBlockListBlockFun = createHigherOrderComponent( ( BlockListBlock ) => {
+const bcsBlockListBlockFun = createHigherOrderComponent( ( BlockListBlock ) => {
 	return ( props ) => {
 		const { name, attributes, clientId } = props;
 		if ( ! hasCustomCssSupport( name ) ) {
@@ -108,7 +132,6 @@ const abcBlockListBlockFun = createHigherOrderComponent( ( BlockListBlock ) => {
 		const { advancedBlockCss } = attributes;
 		const element = useContext( BlockList.__unstableElementContext );
 
-		// selectorをUniqueクラスに変換する
 		let cssTag = advancedBlockCss ? advancedBlockCss : '';
 		if ( cssTag ) {
 			cssTag = advancedBlockCss.replace(
@@ -117,7 +140,6 @@ const abcBlockListBlockFun = createHigherOrderComponent( ( BlockListBlock ) => {
 			);
 		}
 
-		// cssに.editor-styles-wrapperをwrapする
 		if ( cssTag !== '' ) {
 			cssTag = transformStyles(
 				[ { css: cssTag } ],
@@ -139,17 +161,17 @@ const abcBlockListBlockFun = createHigherOrderComponent( ( BlockListBlock ) => {
 addFilter(
 	'blocks.registerBlockType',
 	'block-code-snippets/register-block-type',
-	abcRegisterBlockTypeFuc
+	bcsRegisterBlockTypeFuc
 );
 
 addFilter(
 	'editor.BlockEdit',
 	'block-code-snippets/block-edit',
-	abcBlockEditFunc
+	bcsBlockEditFunc
 );
 
 addFilter(
 	'editor.BlockListBlock',
 	'block-code-snippets/block-list-block',
-	abcBlockListBlockFun
+	bcsBlockListBlockFun
 );
