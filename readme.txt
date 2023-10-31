@@ -11,7 +11,7 @@ License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-Add a simple CSS editor to your Gutenberg block.
+Add a simple CSS and JavaScript editor to your Gutenberg block.
 
 == Frequently Asked Questions ==
 
