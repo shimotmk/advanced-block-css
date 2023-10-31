@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name:       Block Code Snippets
- * Plugin URI:        https://github.com/shimotmk/block-code-snippets
+ * Plugin URI:
  * Description:       Add a simple CSS and JavaScript editor to your Gutenberg block.
  * Requires at least: 5.3
  * Requires PHP:      7.4
