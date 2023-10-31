@@ -22,6 +22,4 @@ defined( 'ABSPATH' ) || exit;
 define( 'BLOCK_CODE_SNIPPETS_DIR_PATH', plugin_dir_path( __FILE__ ) );
 define( 'BLOCK_CODE_SNIPPETS_DIR_URL', plugin_dir_url( __FILE__ ) );
 
-require_once BLOCK_CODE_SNIPPETS_DIR_PATH . 'includes/update/update-checker.php';
-require_once BLOCK_CODE_SNIPPETS_DIR_PATH . 'includes/admin.php';
 require_once BLOCK_CODE_SNIPPETS_DIR_PATH . 'includes/enqueue/index.php';
