@@ -18,15 +18,6 @@ add_action(
 			true
 		);
 
-		$abc_option = get_option( 'block_code_snippets_options' );
-		wp_localize_script( 'block-code-snippets-script', 'advancedBlockCssOptions', $abc_option );
-
-		wp_enqueue_style(
-			'block-code-snippets-style',
-			BLOCK_CODE_SNIPPETS_DIR_URL . 'build/block-code-snippets/style-index.css',
-			array( 'code-editor' ),
-			$asset_file['version']
-		);
 	}
 );
 

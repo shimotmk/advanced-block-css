@@ -94,15 +94,6 @@ add_action(
 		wp_set_script_translations( 'abc-admin-script', 'block-code-snippets' );
 		$abc_option = abc_get_option();
 		wp_localize_script( 'abc-admin-script', 'advancedBlockCssOptions', $abc_option );
-
-		// Load css.
-		wp_register_style(
-			'abc-admin-css',
-			BLOCK_CODE_SNIPPETS_DIR_URL . 'build/admin/style-index.css',
-			null,
-			$asset_file['version']
-		);
-		wp_enqueue_style( 'abc-admin-css' );
 	}
 );
 
