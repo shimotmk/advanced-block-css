@@ -14,36 +14,36 @@ import { AdminContext } from '../index';
 export const OptionsContext = createContext();
 
 export default function UpdateButton() {
-	const { isLoading, abcOption, setIsLoading } = useContext( AdminContext );
-	const [ isSaveSuccess, setIsSaveSuccess ] = useState( '' );
+	const { isLoading, abcOption, setIsLoading } = useContext(AdminContext);
+	const [isSaveSuccess, setIsSaveSuccess] = useState('');
 
 	// オプション値を保存
-	const onClickUpdate = ( event ) => {
+	const onClickUpdate = (event) => {
 		event.preventDefault();
-		setIsLoading( true );
-		api.loadPromise.then( (/*response*/) => {
+		setIsLoading(true);
+		api.loadPromise.then((/*response*/) => {
 			// console.log( response );
-			const model = new api.models.Settings( {
+			const model = new api.models.Settings({
 				block_code_snippets_options: abcOption,
-			} );
+			});
 			const save = model.save();
 
-			save.success( (/* response, status */) => {
+			save.success((/* response, status */) => {
 				// console.log( response );
 				// console.log( status );
-				setTimeout( () => {
-					setIsLoading( false );
-					setIsSaveSuccess( true );
-				}, 600 );
-			} );
+				setTimeout(() => {
+					setIsLoading(false);
+					setIsSaveSuccess(true);
+				}, 600);
+			});
 
-			save.error( () => {
-				setTimeout( () => {
-					setIsLoading( false );
-					setIsSaveSuccess( false );
-				}, 600 );
-			} );
-		} );
+			save.error(() => {
+				setTimeout(() => {
+					setIsLoading(false);
+					setIsSaveSuccess(false);
+				}, 600);
+			});
+		});
 	};
 
 	return (
@@ -51,21 +51,21 @@ export default function UpdateButton() {
 			<div className="update-button-area">
 				<KeyboardShortcuts
 					bindGlobal
-					shortcuts={ {
+					shortcuts={{
 						'mod+s': onClickUpdate,
-					} }
+					}}
 				/>
 				<Button
 					className="update-button"
 					isPrimary
-					onClick={ onClickUpdate }
-					isBusy={ isLoading }
+					onClick={onClickUpdate}
+					isBusy={isLoading}
 				>
-					{ __( 'Save setting', 'block-code-snippets' ) }
+					{__('Save setting', 'block-code-snippets')}
 				</Button>
-				{ isSaveSuccess === false && (
-					<p>{ __( 'Failed to save.', 'block-code-snippets' ) }</p>
-				) }
+				{isSaveSuccess === false && (
+					<p>{__('Failed to save.', 'block-code-snippets')}</p>
+				)}
 			</div>
 		</>
 	);

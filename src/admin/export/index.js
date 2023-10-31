@@ -15,52 +15,50 @@ import CSSExport from './css-export';
 /*globals advancedBlockCssOptions */
 
 export default function ExportSection() {
-	const [ searchTerm, setSearchTerm ] = useState( '' );
+	const [searchTerm, setSearchTerm] = useState('');
 	const { pages, hasResolved } = useSelect(
-		( select ) => {
+		(select) => {
 			const query = {};
-			if ( searchTerm ) {
+			if (searchTerm) {
 				query.search = searchTerm;
 			}
 			// const selectorArgs = [ 'postType', 'post', query ];
 			// 各カスタム投稿タイプ,サイトエディター,ウィジェットエリアもある
-			const selectorArgs = [ 'postType', 'post', query ];
+			const selectorArgs = ['postType', 'post', query];
 			return {
-				pages: select( coreDataStore ).getEntityRecords(
-					...selectorArgs
-				),
-				hasResolved: select( coreDataStore ).hasFinishedResolution(
+				pages: select(coreDataStore).getEntityRecords(...selectorArgs),
+				hasResolved: select(coreDataStore).hasFinishedResolution(
 					'getEntityRecords',
 					selectorArgs
 				),
 			};
 		},
-		[ searchTerm ]
+		[searchTerm]
 	);
 
 	return (
 		<>
 			<h2>
-				{ __( 'Block Code Snippets Export(β)', 'block-code-snippets' ) }
+				{__('Block Code Snippets Export(β)', 'block-code-snippets')}
 			</h2>
 			<p>
-				{ __(
+				{__(
 					'You can export the styles you have added with Block Code Snippets for each page.',
 					'block-code-snippets'
-				) }
+				)}
 			</p>
-			<SearchControl onChange={ setSearchTerm } value={ searchTerm } />
-			<PagesList hasResolved={ hasResolved } pages={ pages } />
+			<SearchControl onChange={setSearchTerm} value={searchTerm} />
+			<PagesList hasResolved={hasResolved} pages={pages} />
 		</>
 	);
 }
 
-function PagesList( { hasResolved, pages } ) {
-	if ( ! hasResolved ) {
+function PagesList({ hasResolved, pages }) {
+	if (!hasResolved) {
 		return <Spinner />;
 	}
-	if ( ! pages?.length ) {
-		return <div>{ __( 'No results', 'block-code-snippets' ) }</div>;
+	if (!pages?.length) {
+		return <div>{__('No results', 'block-code-snippets')}</div>;
 	}
 
 	return (
@@ -68,17 +66,15 @@ function PagesList( { hasResolved, pages } ) {
 			<table className="wp-list-table widefat fixed striped table-view-list">
 				<thead>
 					<tr>
-						<td>{ __( 'Title', 'block-code-snippets' ) }</td>
-						<td>
-							{ __( 'Export CSS File', 'block-code-snippets' ) }
-						</td>
+						<td>{__('Title', 'block-code-snippets')}</td>
+						<td>{__('Export CSS File', 'block-code-snippets')}</td>
 					</tr>
 				</thead>
 				<tbody>
-					{ pages?.map( ( page ) => (
-						<tr key={ page.id }>
-							<td>{ page.title.rendered }</td>
-							{ ( () => {
+					{pages?.map((page) => (
+						<tr key={page.id}>
+							<td>{page.title.rendered}</td>
+							{(() => {
 								let content;
 								let regexp;
 								// ブロックテーマの場合
@@ -91,24 +87,21 @@ function PagesList( { hasResolved, pages } ) {
 									content = page.content.raw;
 									regexp = /advancedBlockCss/;
 								}
-								if ( regexp.test( content ) ) {
+								if (regexp.test(content)) {
 									return (
 										<td>
-											<CSSExport page={ page } />
+											<CSSExport page={page} />
 										</td>
 									);
 								}
 								return (
 									<td>
-										{ __(
-											'Not used',
-											'block-code-snippets'
-										) }
+										{__('Not used', 'block-code-snippets')}
 									</td>
 								);
-							} )() }
+							})()}
 						</tr>
-					) ) }
+					))}
 				</tbody>
 			</table>
 		</>

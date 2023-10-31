@@ -18,36 +18,36 @@ export const AdminContext = createContext();
 
 function AbcAdmin() {
 	// 初期値を設定する
-	const [ isLoading, setIsLoading ] = useState( false );
-	const [ abcOption, setAbcOption ] = useState( advancedBlockCssOptions );
+	const [isLoading, setIsLoading] = useState(false);
+	const [abcOption, setAbcOption] = useState(advancedBlockCssOptions);
 
 	return (
 		<>
-			{ /* AdminContext.Providerで各コンポーネントにvalueを渡す */ }
+			{/* AdminContext.Providerで各コンポーネントにvalueを渡す */}
 			<AdminContext.Provider
-				value={ {
+				value={{
 					isLoading,
 					setIsLoading,
 					abcOption,
 					setAbcOption,
-				} }
+				}}
 			>
 				<div className="privacy-settings-header">
 					<div className="privacy-settings-title-section">
 						<h1>
-							{ ABCIconBold }
-							{ __(
+							{ABCIconBold}
+							{__(
 								'Block Code Snippets Settings',
 								'block-code-snippets'
-							) }
+							)}
 						</h1>
 						<UpdateButton />
 					</div>
 				</div>
 				<div className="privacy-settings-body">
-					{ /* <section className="abc-admin-section">
+					{/* <section className="abc-admin-section">
 						<ActivationSection />
-					</section> */ }
+					</section> */}
 					<section className="abc-admin-section">
 						<ExportSection />
 					</section>
@@ -62,7 +62,7 @@ window.addEventListener(
 	function () {
 		render(
 			<AbcAdmin />,
-			document.querySelector( '#block-code-snippets-admin' )
+			document.querySelector('#block-code-snippets-admin')
 		);
 	},
 	false

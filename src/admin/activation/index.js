@@ -12,16 +12,16 @@ import './style.scss';
 export default function ActivationSection() {
 	return (
 		<>
-			<h2>{ __( 'Activation Settings', 'block-code-snippets' ) }</h2>
+			<h2>{__('Activation Settings', 'block-code-snippets')}</h2>
 			<p>
-				{ __(
+				{__(
 					'You can select the block that activates the Block Code Snippets.',
 					'block-code-snippets'
-				) }
+				)}
 			</p>
 			<div className="abc-admin-activation-block">
-				{ /* https://wordpress.github.io/gutenberg/?path=/story/components-checkboxcontrol--indeterminate */ }
-				{ /* <ToggleControl
+				{/* https://wordpress.github.io/gutenberg/?path=/story/components-checkboxcontrol--indeterminate */}
+				{/* <ToggleControl
 					label={ abcBlocksList[ key ].title }
 					checked={
 						abcOption.activationBlock[ abcBlocksList[ key ].name ]
@@ -36,7 +36,7 @@ export default function ActivationSection() {
 							},
 						} );
 					} }
-				/> */ }
+				/> */}
 			</div>
 		</>
 	);
