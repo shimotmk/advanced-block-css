@@ -1,22 +1,29 @@
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
-import { PanelBody } from '@wordpress/components';
+import { PanelBody, Icon, Button } from '@wordpress/components';
 import {
 	InspectorControls,
 	transformStyles,
 	BlockList,
 } from '@wordpress/block-editor';
-import { createHigherOrderComponent } from '@wordpress/compose';
+import {
+	createHigherOrderComponent,
+	useCopyToClipboard,
+} from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
-import { useContext, createPortal } from '@wordpress/element';
+import {
+	useContext,
+	createPortal,
+	createInterpolateElement,
+} from '@wordpress/element';
 
 /**
  * Internal dependencies
  */
-import './style.scss';
-import { ABCIconBold } from '../utils/logo';
+import { ABCIconBold, Copy } from '../utils/logo';
 
 /**
  * External dependencies
@@ -67,8 +74,17 @@ const bcsBlockEditFunc = createHigherOrderComponent((BlockEdit) => {
 		if (!hasCustomCssSupport(name)) {
 			return <BlockEdit {...props} />;
 		}
-
 		const { advancedBlockCss, advancedBlockJavaScript } = attributes;
+
+		let iconStyle = {};
+		if (advancedBlockCss || advancedBlockJavaScript) {
+			iconStyle = {
+				...iconStyle,
+				background: '#757575',
+				fill: '#fff',
+			};
+		}
+		const ref = useCopyToClipboard('selector');
 
 		return (
 			<>
@@ -77,7 +93,7 @@ const bcsBlockEditFunc = createHigherOrderComponent((BlockEdit) => {
 					<PanelBody
 						className={'abc-editor-panel-body'}
 						title={`Block Code Snippets`}
-						icon={ABCIconBold}
+						icon={<Icon icon={ABCIconBold} style={iconStyle} />}
 						initialOpen={false}
 					>
 						<p>CSS</p>
@@ -92,6 +108,7 @@ const bcsBlockEditFunc = createHigherOrderComponent((BlockEdit) => {
 										emptyStringToUndefined(value),
 								});
 							}}
+							placeholder="selector { color: #fafafa; }"
 						/>
 						<p>JavaScript</p>
 						<CodeMirror
@@ -108,7 +125,33 @@ const bcsBlockEditFunc = createHigherOrderComponent((BlockEdit) => {
 										emptyStringToUndefined(value),
 								});
 							}}
+							placeholder='const el = document.querySelector("selector");'
 						/>
+						<div
+							style={{
+								background: '#f0f0f0',
+								color: '#1e1e1e',
+								padding: '12px',
+							}}
+						>
+							{createInterpolateElement(
+								/* translators: Using the string (<code>selector</code>)<Button></Button>will be replaced with the block-specific CSS class. */
+								__(
+									'Using the string (<code>selector</code>)<Button></Button> will be replaced with the block-specific CSS class.',
+									'block-code-snippets'
+								),
+								{
+									code: <code />,
+									Button: (
+										<Button
+											icon={Copy}
+											size={'small'}
+											ref={ref}
+										/>
+									),
+								}
+							)}
+						</div>
 					</PanelBody>
 				</InspectorControls>
 			</>
