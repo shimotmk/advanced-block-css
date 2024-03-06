@@ -2,5 +2,5 @@
 /**
  * Enqueue Assets
  *
- * @package block-code-snippets
+ * @package advanced-block-css
  */

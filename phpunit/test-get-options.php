@@ -2,7 +2,7 @@
 /**
  * Test Get Option
  *
- * @package block-code-snippets
+ * @package advanced-block-css
  */
 
 /**

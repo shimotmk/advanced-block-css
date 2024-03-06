@@ -1,12 +1,11 @@
 {
-	"name": "block-code-snippets",
+	"name": "advanced-block-css",
 	"version": "0.1.0",
 	"author": "Tomoki Shimomura",
 	"license": "GPL-2.0-or-later",
 	"scripts": {
 		"build": "wp-scripts build --webpack-copy-php",
 		"format": "wp-scripts format src/",
-		"lint:css": "wp-scripts lint-style '**/*.scss'",
 		"lint:js": "wp-scripts lint-js src/ --fix",
 		"lint:php": "composer format && composer phpcs",
 		"start": "npx wp-env start && open http://localhost:1251 && wp-scripts start",
@@ -15,7 +14,7 @@
 		"test:e2e": "node ./test/e2e/run-tests.js",
 		"plugin-zip": "wp-scripts plugin-zip",
 		"packages-update": "wp-scripts packages-update",
-		"phpunit": "composer install && npx wp-env run phpunit \"phpunit -c /var/www/html/wp-content/plugins/block-code-snippets/phpunit.xml.dist --verbose\"",
+		"phpunit": "composer install && npx wp-env run phpunit \"phpunit -c /var/www/html/wp-content/plugins/advanced-block-css/phpunit.xml.dist --verbose\"",
 		"prepare": "husky install"
 	},
 	"devDependencies": {

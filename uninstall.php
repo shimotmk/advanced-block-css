@@ -2,7 +2,7 @@
 /**
  * Delete Option
  *
- * @package block-code-snippets
+ * @package advanced-block-css
  */
 
 if ( ! defined( 'WP_UNINSTALL_PLUGIN' ) ) {

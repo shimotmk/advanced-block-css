@@ -23,14 +23,13 @@ import {
 /**
  * Internal dependencies
  */
-import { ABCIconBold, Copy } from '../utils/logo';
+import { ABCIconBold, Copy } from './utils/logo';
 
 /**
  * External dependencies
  */
 import CodeMirror from '@uiw/react-codemirror';
 import { css } from '@codemirror/lang-css';
-import { javascript } from '@codemirror/lang-javascript';
 import { EditorView } from '@codemirror/view';
 
 export const hasCustomCssSupport = (blockName) => {
@@ -58,9 +57,6 @@ const bcsRegisterBlockTypeFuc = (settings) => {
 		advancedBlockCss: {
 			type: 'string',
 		},
-		advancedBlockJavaScript: {
-			type: 'string',
-		},
 	};
 	return settings;
 };
@@ -74,10 +70,10 @@ const bcsBlockEditFunc = createHigherOrderComponent((BlockEdit) => {
 		if (!hasCustomCssSupport(name)) {
 			return <BlockEdit {...props} />;
 		}
-		const { advancedBlockCss, advancedBlockJavaScript } = attributes;
+		const { advancedBlockCss } = attributes;
 
 		let iconStyle = {};
-		if (advancedBlockCss || advancedBlockJavaScript) {
+		if (advancedBlockCss) {
 			iconStyle = {
 				...iconStyle,
 				background: '#757575',
@@ -92,7 +88,7 @@ const bcsBlockEditFunc = createHigherOrderComponent((BlockEdit) => {
 				<InspectorControls>
 					<PanelBody
 						className={'abc-editor-panel-body'}
-						title={`Block Code Snippets`}
+						title={`Advanced Block CSS`}
 						icon={<Icon icon={ABCIconBold} style={iconStyle} />}
 						initialOpen={false}
 					>
@@ -110,23 +106,6 @@ const bcsBlockEditFunc = createHigherOrderComponent((BlockEdit) => {
 							}}
 							placeholder="selector { color: #fafafa; }"
 						/>
-						<p>JavaScript</p>
-						<CodeMirror
-							value={
-								advancedBlockJavaScript
-									? advancedBlockJavaScript
-									: ''
-							}
-							height="200px"
-							extensions={[javascript(), EditorView.lineWrapping]}
-							onChange={(value) => {
-								setAttributes({
-									advancedBlockJavaScript:
-										emptyStringToUndefined(value),
-								});
-							}}
-							placeholder='const el = document.querySelector("selector");'
-						/>
 						<div
 							style={{
 								background: '#f0f0f0',
@@ -138,7 +117,7 @@ const bcsBlockEditFunc = createHigherOrderComponent((BlockEdit) => {
 								/* translators: Using the string (<code>selector</code>)<Button></Button>will be replaced with the block-specific CSS class. */
 								__(
 									'Using the string (<code>selector</code>)<Button></Button> will be replaced with the block-specific CSS class.',
-									'block-code-snippets'
+									'advanced-block-css'
 								),
 								{
 									code: <code />,
@@ -199,18 +178,18 @@ const bcsBlockListBlockFun = createHigherOrderComponent((BlockListBlock) => {
 
 addFilter(
 	'blocks.registerBlockType',
-	'block-code-snippets/register-block-type',
+	'advanced-block-css/register-block-type',
 	bcsRegisterBlockTypeFuc
 );
 
 addFilter(
 	'editor.BlockEdit',
-	'block-code-snippets/block-edit',
+	'advanced-block-css/block-edit',
 	bcsBlockEditFunc
 );
 
 addFilter(
 	'editor.BlockListBlock',
-	'block-code-snippets/block-list-block',
+	'advanced-block-css/block-list-block',
 	bcsBlockListBlockFun
 );
