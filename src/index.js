@@ -7,7 +7,6 @@ import { PanelBody, Icon, Button } from '@wordpress/components';
 import {
 	InspectorControls,
 	transformStyles,
-	BlockList,
 } from '@wordpress/block-editor';
 import {
 	createHigherOrderComponent,
@@ -15,8 +14,6 @@ import {
 } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
 import {
-	useContext,
-	createPortal,
 	createInterpolateElement,
 } from '@wordpress/element';
 
@@ -148,7 +145,6 @@ const bcsBlockListBlockFun = createHigherOrderComponent((BlockListBlock) => {
 			return <BlockListBlock {...props} />;
 		}
 		const { advancedBlockCss } = attributes;
-		const element = useContext(BlockList.__unstableElementContext);
 
 		let cssTag = advancedBlockCss ? advancedBlockCss : '';
 		if (cssTag) {
@@ -167,9 +163,8 @@ const bcsBlockListBlockFun = createHigherOrderComponent((BlockListBlock) => {
 
 		return (
 			<>
-				{element &&
-					!!cssTag &&
-					createPortal(<style>{cssTag}</style>, element)}
+				{!!cssTag &&
+					<style>{cssTag}</style>}
 				<BlockListBlock {...props} />
 			</>
 		);

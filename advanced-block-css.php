@@ -2,7 +2,7 @@
 /**
  * Plugin Name:       Advanced Block CSS
  * Plugin URI:
- * Description:       Add a simple CSS and JavaScript editor to your Gutenberg block.
+ * Description:       Add a simple CSS editor to your Gutenberg block.
  * Requires at least: 6.3
  * Requires PHP:      7.4
  * Version:           0.1.0
