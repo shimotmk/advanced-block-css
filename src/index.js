@@ -4,18 +4,13 @@
 import { __ } from '@wordpress/i18n';
 import { addFilter } from '@wordpress/hooks';
 import { PanelBody, Icon, Button } from '@wordpress/components';
-import {
-	InspectorControls,
-	transformStyles,
-} from '@wordpress/block-editor';
+import { InspectorControls, transformStyles } from '@wordpress/block-editor';
 import {
 	createHigherOrderComponent,
 	useCopyToClipboard,
 } from '@wordpress/compose';
 import { hasBlockSupport } from '@wordpress/blocks';
-import {
-	createInterpolateElement,
-} from '@wordpress/element';
+import { createInterpolateElement } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -163,8 +158,7 @@ const bcsBlockListBlockFun = createHigherOrderComponent((BlockListBlock) => {
 
 		return (
 			<>
-				{!!cssTag &&
-					<style>{cssTag}</style>}
+				{!!cssTag && <style>{cssTag}</style>}
 				<BlockListBlock {...props} />
 			</>
 		);
