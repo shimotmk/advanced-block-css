@@ -116,7 +116,7 @@ const bcsBlockEditFunc = createHigherOrderComponent((BlockEdit) => {
 							{createInterpolateElement(
 								/* translators: Using the string (<code>selector</code>)<Button></Button>will be replaced with the block-specific CSS class. */
 								__(
-									'Using the string (<code>selector</code>)<Button></Button> will be replaced with the block-specific CSS class.',
+									'(<code>selector</code>) <Button></Button>文字列を記述すると、ブロック固有の CSSクラスに置き換えられます.',
 									'advanced-block-css'
 								),
 								{
